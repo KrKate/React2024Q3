@@ -7,22 +7,22 @@ module.exports = {
     'airbnb',
     'airbnb-typescript',
     'airbnb/hooks',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-  project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-  tsconfigRootDir: __dirname,
-    sourceType: "module",
+    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
   },
   plugins: [
-    'react-refresh', 
-    '@typescript-eslint', 
-    'react', 
+    'react-refresh',
+    '@typescript-eslint',
+    'react',
     'react-hooks',
     'react-compiler',
-    'prettier'
+    'prettier',
   ],
   rules: {
     'react-compiler/react-compiler': 'error',
@@ -45,4 +45,4 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-}
+};
