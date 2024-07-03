@@ -4,17 +4,28 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'airbnb'
+    'airbnb',
+    'airbnb-typescript',
+    'airbnb/hooks',
+    'plugin:prettier/recommended'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+  project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
+  tsconfigRootDir: __dirname,
+    sourceType: "module",
+  },
   plugins: [
     'react-refresh', 
     '@typescript-eslint', 
     'react', 
-    'react-hooks'
+    'react-hooks',
+    'react-compiler',
+    'prettier'
   ],
   rules: {
+    'react-compiler/react-compiler': 'error',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'comma-dangle': ['error', 'only-multiline'],
@@ -33,6 +44,5 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
   },
 }
