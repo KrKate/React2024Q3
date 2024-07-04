@@ -23,6 +23,7 @@ module.exports = {
     'react-hooks',
     'react-compiler',
     'prettier',
+    'eslint-plugin-react-compiler',
   ],
   rules: {
     'react-compiler/react-compiler': 'error',
