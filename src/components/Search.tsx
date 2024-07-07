@@ -1,14 +1,12 @@
 import React, { ChangeEvent } from 'react';
-import Loader from './loader';
 import { SearchProps, SearchState, People } from '../models';
+import Loader from './Loader';
 
 class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
     super(props);
     this.state = {
       searchValue: '',
-      // eslint-disable-next-line react/no-unused-state
-      characters: [],
       isLoading: false,
     };
   }
@@ -38,7 +36,6 @@ class Search extends React.Component<SearchProps, SearchState> {
     fetch(`https://swapi.dev/api/people/?search=${searchValue}`)
       .then((response: Response) => response.json())
       .then((data: { results: People[] }) => {
-        // this.setState({ characters: data.results });
         updateCharacters(data.results);
       })
       .catch((error) => console.error(error))

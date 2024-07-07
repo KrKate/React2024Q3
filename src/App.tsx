@@ -1,8 +1,8 @@
 import React from 'react';
 import { People, State } from './models';
-import Loader from './components/loader';
-import CharacterList from './components/characterList/CharacterList';
-import Search from './components/search';
+import CharacterList from './components/CharacterList/CharacterList';
+import Search from './components/Search';
+import Loader from './components/Loader';
 
 class App extends React.PureComponent<object, State> {
   constructor(props: object) {
@@ -22,7 +22,7 @@ class App extends React.PureComponent<object, State> {
       });
     } else {
       this.setState({ isLoading: true });
-      fetch('https://dummyjson.com/products/')
+      fetch('https://swapi.dev/api/people/')
         .then((response) => response.json())
         .then((data: { results: People[] }) => {
           this.setState({ characters: data.results, isLoading: false });

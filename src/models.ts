@@ -11,7 +11,6 @@ export interface People {
 
 export interface SearchState {
   searchValue: string;
-  characters: People[];
   isLoading: boolean;
 }
 
