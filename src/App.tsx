@@ -1,8 +1,8 @@
 import React from 'react';
 import { People, State } from './models';
-import CharacterList from './components/CharacterList/CharacterList';
 import Search from './components/Search';
 import Loader from './components/Loader';
+import CharacterList from './components/characterList/CharacterList';
 
 class App extends React.PureComponent<object, State> {
   constructor(props: object) {
