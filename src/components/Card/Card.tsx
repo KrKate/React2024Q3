@@ -1,5 +1,6 @@
 import React from 'react';
 import { People } from '../../models';
+import styles from './Card.module.css';
 
 interface CardProps {
   character: People;
@@ -8,9 +9,8 @@ interface CardProps {
 class Card extends React.PureComponent<CardProps> {
   render() {
     const { character } = this.props;
-
     return (
-      <div className="character__card">
+      <div className={styles.characterCard}>
         <h2>{character.name}</h2>
         <ul>
           <li>Height: {character.height}</li>

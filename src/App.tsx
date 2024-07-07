@@ -1,8 +1,9 @@
 import React from 'react';
 import { People, State } from './models';
-import Search from './components/Search';
-import Loader from './components/Loader';
+import Search from './components/Search/Search';
+import Loader from './components/Loader/Loader';
 import CharacterList from './components/characterList/CharacterList';
+import styles from './App.module.css';
 
 class App extends React.PureComponent<object, State> {
   constructor(props: object) {
@@ -41,13 +42,13 @@ class App extends React.PureComponent<object, State> {
     const { characters, isLoading } = this.state;
     return (
       <div>
-        <div className="error-container">
+        <div className={styles.errorContainer}>
           <button type="button">Click for Error</button>
         </div>
-        <div className="search-container">
+        <div className={styles.searchContainer}>
           <Search updateCharacters={this.updateCharacters} />
         </div>
-        <div className="cards-container">
+        <div className={styles.cardsContainer}>
           {isLoading ? <Loader /> : <CharacterList characters={characters} />}
         </div>
       </div>

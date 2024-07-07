@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './Loader.module.css';
 
 class Loader extends React.PureComponent {
   render() {
-    return <div className="loader">Loading...</div>;
+    return <div className={styles.loader}>Loading...</div>;
   }
 }
 

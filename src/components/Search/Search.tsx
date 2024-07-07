@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { SearchProps, SearchState, People } from '../models';
-import Loader from './Loader';
+import { SearchProps, SearchState, People } from '../../models';
+import Loader from '../Loader/Loader';
+import styles from './Search.module.css';
 
 class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
@@ -53,16 +54,20 @@ class Search extends React.Component<SearchProps, SearchState> {
   render() {
     const { searchValue, isLoading } = this.state;
     return (
-      <div className="search__component">
+      <div className={styles.searchComponent}>
         <input
           placeholder="Enter character name"
           type="text"
-          className="search__input"
+          className={styles.searchInput}
           value={searchValue}
           onChange={this.handleInputChange}
           onKeyDown={this.handleKeyPress}
         />
-        <button type="button" onClick={this.handleSearch}>
+        <button
+          type="button"
+          className={styles.searchButton}
+          onClick={this.handleSearch}
+        >
           Search
         </button>
         {isLoading && <Loader />}
