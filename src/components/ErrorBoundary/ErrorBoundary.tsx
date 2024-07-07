@@ -34,6 +34,7 @@ class ErrorBoundary extends Component<Props, State> {
         <div className={styles.errorBoundaryContainer}>
           <h1>Sorry... there was an error</h1>
           <h2>ErrorBoundary is working</h2>
+          <h3>Reload the page to return to the application</h3>
         </div>
       );
     }

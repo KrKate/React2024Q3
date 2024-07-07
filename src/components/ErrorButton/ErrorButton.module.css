@@ -1,0 +1,10 @@
+.errorButton {
+    padding: 3px;
+    border-radius: 10px;
+    height: 2.5rem;
+    transition: all 0.5s easy;
+}
+
+.errorButton:hover {
+    background-color: red;
+}
