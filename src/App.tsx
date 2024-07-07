@@ -4,6 +4,7 @@ import Search from './components/Search/Search';
 import Loader from './components/Loader/Loader';
 import CharacterList from './components/characterList/CharacterList';
 import styles from './App.module.css';
+import ErrorButton from './components/ErrorButton/ErrorButton';
 
 class App extends React.PureComponent<object, State> {
   constructor(props: object) {
@@ -43,13 +44,17 @@ class App extends React.PureComponent<object, State> {
     return (
       <div>
         <div className={styles.errorContainer}>
-          <button type="button">Click for Error</button>
+          <ErrorButton />
         </div>
         <div className={styles.searchContainer}>
           <Search updateCharacters={this.updateCharacters} />
         </div>
         <div className={styles.cardsContainer}>
-          {isLoading ? <Loader /> : <CharacterList characters={characters} />}
+          {isLoading && !characters.length ? (
+            <Loader />
+          ) : (
+            <CharacterList characters={characters} />
+          )}
         </div>
       </div>
     );

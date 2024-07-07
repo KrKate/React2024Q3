@@ -11,7 +11,6 @@ export interface People {
 
 export interface SearchState {
   searchValue: string;
-  isLoading: boolean;
 }
 
 export interface CardProps {

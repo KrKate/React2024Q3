@@ -65,8 +65,8 @@ class Search extends React.Component<SearchProps, SearchState> {
         />
         <button
           type="button"
-          className={styles.searchButton}
           onClick={this.handleSearch}
+          className={styles.searchButton}
         >
           Search
         </button>
