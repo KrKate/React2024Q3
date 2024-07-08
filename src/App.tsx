@@ -5,6 +5,7 @@ import Loader from './components/Loader/Loader';
 import CharacterList from './components/characterList/CharacterList';
 import styles from './App.module.css';
 import ErrorButton from './components/ErrorButton/ErrorButton';
+import { fetchCharacters, URL } from './helpers/api';
 
 class App extends React.PureComponent<object, State> {
   constructor(props: object) {
@@ -24,13 +25,9 @@ class App extends React.PureComponent<object, State> {
       });
     } else {
       this.setState({ isLoading: true });
-      fetch('https://swapi.dev/api/people/')
-        .then((response) => response.json())
-        .then((data: { results: People[] }) => {
-          this.setState({ characters: data.results, isLoading: false });
-          localStorage.setItem('characters', JSON.stringify(data.results));
-        })
-        .catch((error) => console.log(error));
+      fetchCharacters(`${URL.base}`).then((characters) => {
+        this.setState({ characters, isLoading: false });
+      });
     }
   }
 

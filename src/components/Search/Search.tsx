@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
-import { SearchProps, SearchState, People } from '../../models';
+import { SearchProps, SearchState } from '../../models';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';
+import { fetchCharacters, URL } from '../../helpers/api';
 
 class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
@@ -34,12 +35,10 @@ class Search extends React.Component<SearchProps, SearchState> {
     localStorage.setItem('searchValue', searchValue);
     this.setState({ isLoading: true });
 
-    fetch(`https://swapi.dev/api/people/?search=${searchValue}`)
-      .then((response: Response) => response.json())
-      .then((data: { results: People[] }) => {
-        updateCharacters(data.results);
+    fetchCharacters(`${URL.base}${URL.search}${searchValue}`)
+      .then((characters) => {
+        updateCharacters(characters);
       })
-      .catch((error) => console.error(error))
       .finally(() => {
         this.setState({ isLoading: false });
       });
