@@ -1,12 +1,9 @@
-export interface People {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
+export interface Product {
+  title: string;
+  id: number;
+  description: string;
+  price: number;
+  images: string;
 }
 
 export interface SearchState {
@@ -15,14 +12,14 @@ export interface SearchState {
 }
 
 export interface CardProps {
-  character: People;
+  product: Product;
 }
 
 export interface State {
-  characters: People[];
+  products: Product[];
   isLoading: boolean;
 }
 
 export interface SearchProps {
-  updateCharacters: (characters: People[]) => void;
+  updateProducts: (products: Product[]) => void;
 }

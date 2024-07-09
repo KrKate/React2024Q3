@@ -1,26 +1,23 @@
 import React from 'react';
-import { People } from '../../models';
 import styles from './Card.module.css';
+import { Product } from '../../models';
 
 interface CardProps {
-  character: People;
+  product: Product;
 }
 
 class Card extends React.PureComponent<CardProps> {
   render() {
-    const { character } = this.props;
+    const { product } = this.props;
     return (
       <div className={styles.characterCard}>
-        <h2>{character.name}</h2>
-        <ul>
-          <li>Height: {character.height}</li>
-          <li>Mass: {character.mass}</li>
-          <li>Hair color: {character.hair_color}</li>
-          <li>Skin color: {character.skin_color}</li>
-          <li>Eye color: {character.eye_color}</li>
-          <li>Birth year: {character.birth_year}</li>
-          <li>Gender: {character.gender}</li>
-        </ul>
+        <img
+          src={product.images}
+          alt={product.title}
+          className={styles.images}
+        />
+        <h2>{product.title}</h2>
+        <div>{product.price} $</div>
       </div>
     );
   }

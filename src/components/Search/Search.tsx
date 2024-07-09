@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { SearchProps, SearchState } from '../../models';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';
-import { fetchCharacters, URL } from '../../helpers/api';
+import { fetchProducts, URL } from '../../helpers/api';
 
 class Search extends React.Component<SearchProps, SearchState> {
   constructor(props: SearchProps) {
@@ -31,13 +31,13 @@ class Search extends React.Component<SearchProps, SearchState> {
 
   handleSearch = () => {
     const { searchValue } = this.state;
-    const { updateCharacters } = this.props;
+    const { updateProducts } = this.props;
     localStorage.setItem('searchValue', searchValue);
     this.setState({ isLoading: true });
 
-    fetchCharacters(`${URL.base}${URL.search}${searchValue}`)
-      .then((characters) => {
-        updateCharacters(characters);
+    fetchProducts(`${URL.base}${URL.search}${searchValue}`)
+      .then((products) => {
+        updateProducts(products);
       })
       .finally(() => {
         this.setState({ isLoading: false });

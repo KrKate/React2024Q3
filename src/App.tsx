@@ -1,56 +1,56 @@
 import React from 'react';
-import { People, State } from './models';
+import { Product, State } from './models';
 import Search from './components/Search/Search';
 import Loader from './components/Loader/Loader';
-import CharacterList from './components/characterList/CharacterList';
 import styles from './App.module.css';
 import ErrorButton from './components/ErrorButton/ErrorButton';
-import { fetchCharacters, URL } from './helpers/api';
+import { fetchProducts, URL } from './helpers/api';
+import ProductList from './components/productList/ProductList';
 
 class App extends React.PureComponent<object, State> {
   constructor(props: object) {
     super(props);
     this.state = {
-      characters: [],
+      products: [],
       isLoading: true,
     };
   }
 
   componentDidMount() {
-    const savedCharacters = localStorage.getItem('characters');
-    if (savedCharacters) {
+    const savedProducts = localStorage.getItem('products');
+    if (savedProducts) {
       this.setState({
-        characters: JSON.parse(savedCharacters),
+        products: JSON.parse(savedProducts),
         isLoading: false,
       });
     } else {
       this.setState({ isLoading: true });
-      fetchCharacters(`${URL.base}`).then((characters) => {
-        this.setState({ characters, isLoading: false });
+      fetchProducts(`${URL.base}`).then((products) => {
+        this.setState({ products, isLoading: false });
       });
     }
   }
 
-  updateCharacters = (characters: People[]) => {
-    this.setState({ characters });
-    localStorage.setItem('characters', JSON.stringify(characters));
+  updateProducts = (products: Product[]) => {
+    this.setState({ products });
+    localStorage.setItem('products', JSON.stringify(products));
   };
 
   render() {
-    const { characters, isLoading } = this.state;
+    const { products, isLoading } = this.state;
     return (
       <div>
         <div className={styles.errorContainer}>
           <ErrorButton />
         </div>
         <div className={styles.searchContainer}>
-          <Search updateCharacters={this.updateCharacters} />
+          <Search updateProducts={this.updateProducts} />
         </div>
         <div className={styles.cardsContainer}>
-          {isLoading && !characters.length ? (
+          {isLoading && !products.length ? (
             <Loader />
           ) : (
-            <CharacterList characters={characters} />
+            <ProductList products={products} />
           )}
         </div>
       </div>
