@@ -1,61 +1,52 @@
-import React from 'react';
-import { Product, State } from './models';
+import { useEffect, useState } from 'react';
 import Search from './components/Search/Search';
 import Loader from './components/Loader/Loader';
 import styles from './App.module.css';
 import ErrorButton from './components/ErrorButton/ErrorButton';
 import { fetchProducts, URL } from './helpers/api';
 import ProductList from './components/productList/ProductList';
+import { Product } from './models';
 
-class App extends React.PureComponent<object, State> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      products: [],
-      isLoading: true,
-    };
-  }
+function App() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  componentDidMount() {
+  useEffect(() => {
     const savedProducts = localStorage.getItem('products');
     if (savedProducts) {
-      this.setState({
-        products: JSON.parse(savedProducts),
-        isLoading: false,
-      });
+      setProducts(JSON.parse(savedProducts));
+      setIsLoading(false);
     } else {
-      this.setState({ isLoading: true });
-      fetchProducts(`${URL.base}`).then((products) => {
-        this.setState({ products, isLoading: false });
+      setIsLoading(true);
+      fetchProducts(`${URL.base}`).then((commodity) => {
+        setProducts(commodity);
+        setIsLoading(false);
       });
     }
-  }
+  }, []);
 
-  updateProducts = (products: Product[]) => {
-    this.setState({ products });
-    localStorage.setItem('products', JSON.stringify(products));
+  const updateProducts = (updatedProducts: Product[]) => {
+    setProducts(updatedProducts);
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
 
-  render() {
-    const { products, isLoading } = this.state;
-    return (
-      <div>
-        <div className={styles.errorContainer}>
-          <ErrorButton />
-        </div>
-        <div className={styles.searchContainer}>
-          <Search updateProducts={this.updateProducts} />
-        </div>
-        <div className={styles.cardsContainer}>
-          {isLoading && !products.length ? (
-            <Loader />
-          ) : (
-            <ProductList products={products} />
-          )}
-        </div>
+  return (
+    <div>
+      <div className={styles.errorContainer}>
+        <ErrorButton />
       </div>
-    );
-  }
+      <div className={styles.searchContainer}>
+        <Search updateProducts={updateProducts} />
+      </div>
+      <div className={styles.cardsContainer}>
+        {isLoading && !products.length ? (
+          <Loader />
+        ) : (
+          <ProductList products={products} />
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default App;

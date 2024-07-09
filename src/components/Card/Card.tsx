@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Card.module.css';
 import { Product } from '../../models';
 
@@ -6,21 +5,14 @@ interface CardProps {
   product: Product;
 }
 
-class Card extends React.PureComponent<CardProps> {
-  render() {
-    const { product } = this.props;
-    return (
-      <div className={styles.characterCard}>
-        <img
-          src={product.images}
-          alt={product.title}
-          className={styles.images}
-        />
-        <h2>{product.title}</h2>
-        <div>{product.price} $</div>
-      </div>
-    );
-  }
+function Card({ product }: CardProps): JSX.Element {
+  return (
+    <div className={styles.characterCard}>
+      <img src={product.images} alt={product.title} className={styles.images} />
+      <h2>{product.title}</h2>
+      <div>{product.price} $</div>
+    </div>
+  );
 }
 
 export default Card;

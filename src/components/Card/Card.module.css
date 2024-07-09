@@ -12,6 +12,7 @@
   text-align: center;
   justify-content: center;
   padding: 10px;
+  transition: all 0.5 linear;
 }
 
 .characterCard:hover {
