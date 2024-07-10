@@ -1,7 +1,8 @@
 export enum URL {
-  base = `//dummyjson.com/products/`,
-  search = `search?q=`,
-  select = `&select=title`,
+  base = `//dummyjson.com/products`,
+  search = `/search?q=`,
+  limit = `?limit=`,
+  skip = `&skip=`,
 }
 
 export const fetchProducts = async (url: string) => {

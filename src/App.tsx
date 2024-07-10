@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import Search from './components/Search/Search';
 import Loader from './components/Loader/Loader';
@@ -6,10 +7,12 @@ import ErrorButton from './components/ErrorButton/ErrorButton';
 import { fetchProducts, URL } from './helpers/api';
 import ProductList from './components/productList/ProductList';
 import { Product } from './models';
+import LimitPage from './components/LimitPage/LimitPage';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
@@ -18,16 +21,20 @@ function App() {
       setIsLoading(false);
     } else {
       setIsLoading(true);
-      fetchProducts(`${URL.base}`).then((commodity) => {
+      fetchProducts(`${URL.base}${URL.limit}${limit}`).then((commodity) => {
         setProducts(commodity);
         setIsLoading(false);
       });
     }
-  }, []);
+  }, [limit]);
 
   const updateProducts = (updatedProducts: Product[]) => {
     setProducts(updatedProducts);
     localStorage.setItem('products', JSON.stringify(updatedProducts));
+  };
+
+  const handleLimitChange = (newLimit: number) => {
+    setLimit(newLimit);
   };
 
   return (
@@ -45,6 +52,7 @@ function App() {
           <ProductList products={products} />
         )}
       </div>
+      <LimitPage handleLimitChange={handleLimitChange} />
     </div>
   );
 }
