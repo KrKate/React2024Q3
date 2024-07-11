@@ -1,30 +1,34 @@
-interface PaginationProps {
-  pagination: {
-    productsPerPage: number;
-    totalProducts: number;
-  };
-}
+/* eslint-disable react/function-component-definition */
+/* eslint-disable react/button-has-type */
+import React from 'react';
+import styles from './Pagination.module.css';
 
-function Pagination({ pagination }: PaginationProps): JSX.Element {
-  const pageNumbers = [];
-  for (
-    let i = 1;
-    i <= Math.ceil(pagination.totalProducts / pagination.productsPerPage);
-    i += 1
-  ) {
-    pageNumbers.push(1);
-  }
+type Props = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
+
+const Pagination: React.FC<Props> = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
-    <div>
-      <ul>
-        {pageNumbers.map((number) => (
-          <li>
-            <a href="!#">{number}</a>
-          </li>
-        ))}
-      </ul>
+    <div className={styles.pagination}>
+      {pages.map((page) => (
+        <button
+          key={page}
+          className={currentPage === page ? styles.active : ''}
+          onClick={() => onPageChange(page)}
+        >
+          {page}
+        </button>
+      ))}
     </div>
   );
-}
+};
 
 export default Pagination;

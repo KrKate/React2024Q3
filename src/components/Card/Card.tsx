@@ -8,7 +8,11 @@ interface CardProps {
 function Card({ product }: CardProps): JSX.Element {
   return (
     <div className={styles.characterCard}>
-      <img src={product.images} alt={product.title} className={styles.images} />
+      <img
+        src={product.images[0]}
+        alt={product.title}
+        className={styles.images}
+      />
       <h2>{product.title}</h2>
       <div>{product.price} $</div>
     </div>

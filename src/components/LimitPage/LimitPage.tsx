@@ -11,11 +11,9 @@ function LimitPage({ handleLimitChange }: LimitPageProps) {
     <div>
       <label htmlFor="limit">
         Items per page:
-        <select id="limit" onChange={handleSelectChange}>
+        <select id="limit" onChange={handleSelectChange} defaultValue="10">
           <option value="5">5</option>
-          <option selected value="10">
-            10
-          </option>
+          <option value="10">10</option>
           <option value="15">15</option>
           <option value="20">20</option>
         </select>

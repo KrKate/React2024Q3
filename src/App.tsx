@@ -8,11 +8,15 @@ import { fetchProducts, URL } from './helpers/api';
 import ProductList from './components/productList/ProductList';
 import { Product } from './models';
 import LimitPage from './components/LimitPage/LimitPage';
+import Pagination from './components/Pagination/Pagination';
 
 function App() {
+  const total = 194;
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [limit, setLimit] = useState(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState(total / limit);
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
@@ -21,12 +25,14 @@ function App() {
       setIsLoading(false);
     } else {
       setIsLoading(true);
-      fetchProducts(`${URL.base}${URL.limit}${limit}`).then((commodity) => {
+      fetchProducts(
+        `${URL.base}${URL.limit}${limit}${URL.skip}${(currentPage - 1) * limit}`
+      ).then((commodity) => {
         setProducts(commodity);
         setIsLoading(false);
       });
     }
-  }, [limit]);
+  }, [currentPage, limit]);
 
   const updateProducts = (updatedProducts: Product[]) => {
     setProducts(updatedProducts);
@@ -35,6 +41,12 @@ function App() {
 
   const handleLimitChange = (newLimit: number) => {
     setLimit(newLimit);
+    setTotalPages(Math.ceil(total / newLimit));
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -53,6 +65,11 @@ function App() {
         )}
       </div>
       <LimitPage handleLimitChange={handleLimitChange} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }
