@@ -1,3 +1,5 @@
+import styles from './LimitPage.module.css';
+
 type LimitPageProps = {
   handleLimitChange: (limit: number) => void;
 };
@@ -8,9 +10,9 @@ function LimitPage({ handleLimitChange }: LimitPageProps) {
   };
 
   return (
-    <div>
+    <div className={styles.limitContainer}>
       <label htmlFor="limit">
-        Items per page:
+        Items:
         <select id="limit" onChange={handleSelectChange} defaultValue="10">
           <option value="5">5</option>
           <option value="10">10</option>

@@ -1,6 +1,3 @@
-/* eslint-disable react/function-component-definition */
-/* eslint-disable react/button-has-type */
-import React from 'react';
 import styles from './Pagination.module.css';
 
 type Props = {
@@ -9,17 +6,14 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-const Pagination: React.FC<Props> = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-}) => {
+function Pagination({ currentPage, totalPages, onPageChange }: Props) {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
     <div className={styles.pagination}>
       {pages.map((page) => (
         <button
+          type="button"
           key={page}
           className={currentPage === page ? styles.active : ''}
           onClick={() => onPageChange(page)}
@@ -29,6 +23,6 @@ const Pagination: React.FC<Props> = ({
       ))}
     </div>
   );
-};
+}
 
 export default Pagination;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import Search from './components/Search/Search';
 import Loader from './components/Loader/Loader';
@@ -36,13 +35,13 @@ function App() {
 
   const updateProducts = (updatedProducts: Product[]) => {
     setProducts(updatedProducts);
+    setCurrentPage(1);
     localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
 
   const handleLimitChange = (newLimit: number) => {
     setLimit(newLimit);
     setTotalPages(Math.ceil(total / newLimit));
-    setCurrentPage(1);
   };
 
   const handlePageChange = (pageNumber: number) => {

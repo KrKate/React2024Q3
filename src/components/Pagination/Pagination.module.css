@@ -1,0 +1,16 @@
+button {
+    padding: 3px;
+    font-size: 16px;
+} 
+
+.active {
+    border-color: blue;
+}
+
+.pagination {
+    margin: 1rem;
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
