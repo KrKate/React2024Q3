@@ -2,11 +2,19 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';
 import { fetchProducts, URL } from '../../helpers/api';
-import { SearchProps } from '../../models';
+import { Product } from '../../models';
 
-function Search({ updateProducts }: SearchProps) {
+function Search({
+  updateProducts,
+}: {
+  updateProducts: (updatedProducts: Product[], newTotal: number) => void;
+}) {
   const [searchValue, setSearchValue] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [total] = useState(194);
+  const [limit] = useState(10);
+  const [, setTotalPages] = useState(total / limit);
+  const [, setSearchTotal] = useState(0);
 
   useEffect(() => {
     const savedValue = localStorage.getItem('searchValue');
@@ -26,10 +34,11 @@ function Search({ updateProducts }: SearchProps) {
   const handleSearch = () => {
     localStorage.setItem('searchValue', searchValue);
     setIsLoading(true);
-
     fetchProducts(`${URL.base}${URL.search}${searchValue}`)
       .then((products) => {
-        updateProducts(products);
+        updateProducts(products, products.length);
+        setSearchTotal(products.length);
+        setTotalPages(Math.ceil(products.length / limit));
       })
       .finally(() => {
         setIsLoading(false);

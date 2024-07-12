@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import Search from './components/Search/Search';
-import Loader from './components/Loader/Loader';
-import styles from './App.module.css';
-import ErrorButton from './components/ErrorButton/ErrorButton';
-import { fetchProducts, URL } from './helpers/api';
-import ProductList from './components/productList/ProductList';
-import { Product } from './models';
-import LimitPage from './components/LimitPage/LimitPage';
-import Pagination from './components/Pagination/Pagination';
+import Search from '../../components/Search/Search';
+import Loader from '../../components/Loader/Loader';
+import styles from './HomePage.module.css';
+import ErrorButton from '../../components/ErrorButton/ErrorButton';
+import { fetchProducts, URL } from '../../helpers/api';
+import ProductList from '../../components/productList/ProductList';
+import { Product } from '../../models';
+import LimitPage from '../../components/LimitPage/LimitPage';
+import Pagination from '../../components/Pagination/Pagination';
 
-function App() {
-  const total = 194;
+function Home() {
+  const [total] = useState(194);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [limit, setLimit] = useState(10);
@@ -33,8 +33,9 @@ function App() {
     }
   }, [currentPage, limit]);
 
-  const updateProducts = (updatedProducts: Product[]) => {
+  const updateProducts = (updatedProducts: Product[], newTotal: number) => {
     setProducts(updatedProducts);
+    setTotalPages(Math.ceil(newTotal / limit));
     setCurrentPage(1);
     localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
@@ -42,6 +43,7 @@ function App() {
   const handleLimitChange = (newLimit: number) => {
     setLimit(newLimit);
     setTotalPages(Math.ceil(total / newLimit));
+    setCurrentPage(1);
   };
 
   const handlePageChange = (pageNumber: number) => {
@@ -73,4 +75,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styles from './Pagination.module.css';
 
 type Props = {
@@ -7,7 +8,16 @@ type Props = {
 };
 
 function Pagination({ currentPage, totalPages, onPageChange }: Props) {
+  const [, setSelectedPage] = useState(currentPage);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  useEffect(() => {
+    setSelectedPage(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setSelectedPage(page);
+    onPageChange(page);
+  };
 
   return (
     <div className={styles.pagination}>
@@ -16,7 +26,7 @@ function Pagination({ currentPage, totalPages, onPageChange }: Props) {
           type="button"
           key={page}
           className={currentPage === page ? styles.active : ''}
-          onClick={() => onPageChange(page)}
+          onClick={() => handlePageChange(page)}
         >
           {page}
         </button>
