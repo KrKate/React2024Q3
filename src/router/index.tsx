@@ -4,18 +4,18 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import ErrorPage from '../pages/errorPage/ErrorPage';
-import Home from '../pages/home/HomePage';
-import Details from '../pages/details/DetailsPage';
+import DetailsPage from '../pages/details/DetailsPage';
+import HomePage from '../pages/home/HomePage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/home" element={<Home />} errorElement={<ErrorPage />}>
+    <Route path="/" element={<HomePage />} errorElement={<ErrorPage />}>
       <Route
         path="/details"
-        element={<Details />}
+        element={<DetailsPage />}
         errorElement={<ErrorPage />}
       />
-      <Route path="/*" element={<ErrorPage />} errorElement={<Home />} />
+      <Route path="/*" element={<ErrorPage />} errorElement={<HomePage />} />
     </Route>
   )
 );

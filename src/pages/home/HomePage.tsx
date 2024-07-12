@@ -8,14 +8,16 @@ import ProductList from '../../components/productList/ProductList';
 import { Product } from '../../models';
 import LimitPage from '../../components/LimitPage/LimitPage';
 import Pagination from '../../components/Pagination/Pagination';
+import DetailsPage from '../details/DetailsPage';
 
-function Home() {
+function HomePage() {
   const [total] = useState(194);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [limit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState(total / limit);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
@@ -50,6 +52,10 @@ function Home() {
     setCurrentPage(pageNumber);
   };
 
+  const toggleDetails = () => {
+    setIsDetailsOpen(!isDetailsOpen);
+  };
+
   return (
     <div>
       <div className={styles.errorContainer}>
@@ -58,12 +64,15 @@ function Home() {
       <div className={styles.searchContainer}>
         <Search updateProducts={updateProducts} />
       </div>
-      <div className={styles.cardsContainer}>
-        {isLoading && !products.length ? (
-          <Loader />
-        ) : (
-          <ProductList products={products} />
-        )}
+      <div className={styles.mainContainer}>
+        <div className={styles.cardsContainer}>
+          {isLoading && !products.length ? (
+            <Loader />
+          ) : (
+            <ProductList products={products} toggleDetails={toggleDetails} />
+          )}
+        </div>
+        {isDetailsOpen && <DetailsPage />}
       </div>
       <LimitPage handleLimitChange={handleLimitChange} />
       <Pagination
@@ -75,4 +84,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

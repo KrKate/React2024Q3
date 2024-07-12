@@ -3,9 +3,13 @@ import { Product } from '../../models';
 
 interface ProductListProps {
   products: Product[];
+  toggleDetails: () => void;
 }
 
-function ProductList({ products }: ProductListProps): JSX.Element {
+function ProductList({
+  products,
+  toggleDetails,
+}: ProductListProps): JSX.Element {
   if (products.length === 0) {
     return <p>Product not found</p>;
   }
@@ -13,7 +17,11 @@ function ProductList({ products }: ProductListProps): JSX.Element {
   return (
     <>
       {products.map((product: Product) => (
-        <Card key={product.id} product={product} />
+        <Card
+          key={product.id}
+          product={product}
+          toggleDetails={toggleDetails}
+        />
       ))}
     </>
   );
