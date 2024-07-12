@@ -3,7 +3,7 @@ import { Product } from '../../models';
 
 interface ProductListProps {
   products: Product[];
-  toggleDetails: () => void;
+  toggleDetails: (id: number) => void;
 }
 
 function ProductList({
@@ -20,7 +20,7 @@ function ProductList({
         <Card
           key={product.id}
           product={product}
-          toggleDetails={toggleDetails}
+          toggleDetails={() => toggleDetails(product.id)}
         />
       ))}
     </>

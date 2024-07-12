@@ -4,13 +4,17 @@ import { Product } from '../../models';
 
 interface CardProps {
   product: Product;
-  toggleDetails: () => void;
+  toggleDetails: (id: number) => void;
 }
 
 function Card({ product, toggleDetails }: CardProps): JSX.Element {
+  const handleCardClick = () => {
+    toggleDetails(product.id);
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div className={styles.characterCard} onClick={toggleDetails}>
+    <div className={styles.characterCard} onClick={handleCardClick}>
       <img
         src={product.images[0]}
         alt={product.title}

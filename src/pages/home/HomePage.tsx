@@ -18,6 +18,7 @@ function HomePage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState(total / limit);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
@@ -52,8 +53,14 @@ function HomePage() {
     setCurrentPage(pageNumber);
   };
 
-  const toggleDetails = () => {
-    setIsDetailsOpen(!isDetailsOpen);
+  const toggleDetails = (id: number) => {
+    if (selectedId === id) {
+      setIsDetailsOpen(false);
+      setSelectedId(null);
+    } else {
+      setIsDetailsOpen(true);
+      setSelectedId(id);
+    }
   };
 
   return (
@@ -72,7 +79,7 @@ function HomePage() {
             <ProductList products={products} toggleDetails={toggleDetails} />
           )}
         </div>
-        {isDetailsOpen && <DetailsPage />}
+        {isDetailsOpen && <DetailsPage id={selectedId} />}
       </div>
       <LimitPage handleLimitChange={handleLimitChange} />
       <Pagination
