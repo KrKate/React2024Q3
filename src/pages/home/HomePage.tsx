@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Search from '../../components/Search/Search';
 import Loader from '../../components/Loader/Loader';
 import styles from './HomePage.module.css';
@@ -7,8 +8,8 @@ import { fetchProducts, URL } from '../../helpers/api';
 import ProductList from '../../components/productList/ProductList';
 import { Product } from '../../models';
 import LimitPage from '../../components/LimitPage/LimitPage';
-import Pagination from '../../components/Pagination/Pagination';
 import DetailsPage from '../details/DetailsPage';
+import Pagination from '../../components/Pagination/Pagination';
 
 function HomePage() {
   const [total] = useState(194);
@@ -19,6 +20,7 @@ function HomePage() {
   const [totalPages, setTotalPages] = useState(total / limit);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
@@ -66,6 +68,7 @@ function HomePage() {
   const handleCloseDetails = () => {
     setIsDetailsOpen(false);
     setSelectedId(null);
+    navigate(`/page=${currentPage}`);
   };
 
   return (
@@ -81,7 +84,11 @@ function HomePage() {
           {isLoading && !products.length ? (
             <Loader />
           ) : (
-            <ProductList products={products} toggleDetails={toggleDetails} />
+            <ProductList
+              products={products}
+              toggleDetails={toggleDetails}
+              page={currentPage}
+            />
           )}
         </div>
         {isDetailsOpen && (
