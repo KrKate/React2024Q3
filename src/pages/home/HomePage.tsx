@@ -63,11 +63,6 @@ function HomePage() {
     }
   };
 
-  // const handleOpenDetails = (id: number) => {
-  //   setIsDetailsOpen(true);
-  //   setSelectedId(id);
-  // };
-
   const handleCloseDetails = () => {
     setIsDetailsOpen(false);
     setSelectedId(null);

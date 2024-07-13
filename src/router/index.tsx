@@ -1,10 +1,10 @@
 import {
+  Outlet,
   Route,
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
 import ErrorPage from '../pages/errorPage/ErrorPage';
-import DetailsPage from '../pages/details/DetailsPage';
 import HomePage from '../pages/home/HomePage';
 
 const router = createBrowserRouter(
@@ -12,7 +12,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<HomePage />} errorElement={<ErrorPage />}>
       <Route
         path="/details"
-        element={<DetailsPage id={null} onClose={() => {}} />}
+        element={<Outlet />}
         errorElement={<ErrorPage />}
       />
       <Route path="/*" element={<ErrorPage />} errorElement={<HomePage />} />
