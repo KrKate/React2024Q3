@@ -6,9 +6,10 @@ import { fetchDetails, URL } from '../../helpers/api';
 
 interface DetailsProps {
   id: number | null;
+  onClose: () => void;
 }
 
-function Details({ id }: DetailsProps): JSX.Element {
+function Details({ id, onClose }: DetailsProps): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -30,6 +31,10 @@ function Details({ id }: DetailsProps): JSX.Element {
     return <p>Loading...</p>;
   }
 
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <div className={styles.detailsContainer}>
       <img
@@ -40,6 +45,9 @@ function Details({ id }: DetailsProps): JSX.Element {
       <h2>{product.title}</h2>
       <p>{product.price} $</p>
       <p> {product.description}</p>
+      <button type="button" onClick={handleClose}>
+        Close
+      </button>
     </div>
   );
 }

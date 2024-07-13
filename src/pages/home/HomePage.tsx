@@ -63,6 +63,16 @@ function HomePage() {
     }
   };
 
+  // const handleOpenDetails = (id: number) => {
+  //   setIsDetailsOpen(true);
+  //   setSelectedId(id);
+  // };
+
+  const handleCloseDetails = () => {
+    setIsDetailsOpen(false);
+    setSelectedId(null);
+  };
+
   return (
     <div>
       <div className={styles.errorContainer}>
@@ -79,7 +89,9 @@ function HomePage() {
             <ProductList products={products} toggleDetails={toggleDetails} />
           )}
         </div>
-        {isDetailsOpen && <DetailsPage id={selectedId} />}
+        {isDetailsOpen && (
+          <DetailsPage id={selectedId} onClose={handleCloseDetails} />
+        )}
       </div>
       <LimitPage handleLimitChange={handleLimitChange} />
       <Pagination

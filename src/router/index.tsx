@@ -12,7 +12,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<HomePage />} errorElement={<ErrorPage />}>
       <Route
         path="/details"
-        element={<DetailsPage id={1} />}
+        element={<DetailsPage id={null} onClose={() => {}} />}
         errorElement={<ErrorPage />}
       />
       <Route path="/*" element={<ErrorPage />} errorElement={<HomePage />} />

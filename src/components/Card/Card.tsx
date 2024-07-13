@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import styles from './Card.module.css';
 import { Product } from '../../models';
 
@@ -12,9 +11,20 @@ function Card({ product, toggleDetails }: CardProps): JSX.Element {
     toggleDetails(product.id);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      toggleDetails(product.id);
+    }
+  };
+
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div className={styles.characterCard} onClick={handleCardClick}>
+    <div
+      className={styles.characterCard}
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+    >
       <img
         src={product.images[0]}
         alt={product.title}
