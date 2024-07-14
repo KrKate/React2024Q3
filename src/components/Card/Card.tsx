@@ -24,11 +24,13 @@ function Card({ product, toggleDetails }: CardProps): JSX.Element {
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
+      data-testid="cardTest"
     >
       <img
         src={product.images[0]}
         alt={product.title}
         className={styles.images}
+        key={product.id}
       />
       <h2>{product.title}</h2>
       <div>{product.price} $</div>

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Pagination.module.css';
 
 type Props = {
@@ -9,23 +9,18 @@ type Props = {
 
 function Pagination({ currentPage, totalPages, onPageChange }: Props) {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  const navigate = useNavigate();
-  const navigatePageChange = (page: number) => {
-    onPageChange(page);
-    navigate(`/page=${page}`);
-  };
 
   return (
     <div className={styles.pagination}>
       {pages.map((page) => (
-        <button
-          type="button"
+        <Link
+          to={`/page=${page}`}
           key={page}
           className={currentPage === page ? styles.active : ''}
-          onClick={() => navigatePageChange(page)}
+          onClick={() => onPageChange(page)}
         >
-          {page}
-        </button>
+          <button type="button">{page}</button>
+        </Link>
       ))}
     </div>
   );

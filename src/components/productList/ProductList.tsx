@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import { Product } from '../../models';
+import styles from './ProductList.module.css';
 
 interface ProductListProps {
   products: Product[];
@@ -13,8 +14,6 @@ function ProductList({
   toggleDetails,
   page,
 }: ProductListProps): JSX.Element {
-  const navigate = useNavigate();
-
   if (products.length === 0) {
     return <p>Product not found</p>;
   }
@@ -22,14 +21,17 @@ function ProductList({
   return (
     <>
       {products.map((product: Product) => (
-        <Card
+        <Link
+          to={`/page=${page}/details=${product.id}`}
+          data-testid="card"
           key={product.id}
-          product={product}
-          toggleDetails={() => {
-            toggleDetails(product.id);
-            navigate(`/page=${page}/details=${product.id}`);
-          }}
-        />
+          className={styles.link}
+        >
+          <Card
+            product={product}
+            toggleDetails={() => toggleDetails(product.id)}
+          />
+        </Link>
       ))}
     </>
   );
