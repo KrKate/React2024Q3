@@ -1,0 +1,35 @@
+.characterCard {
+  width: 200px;
+  height: 230px;
+  background-color: rgb(178, 178, 180);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: none;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.5 linear;
+}
+
+.characterCard:hover {
+  background-color: rgb(206, 206, 209);
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.images {
+  height: 50%;
+  padding: 0;
+}
