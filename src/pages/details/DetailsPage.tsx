@@ -61,7 +61,7 @@ function DetailsPage({ id, onClose }: DetailsProps): JSX.Element {
       <h2>{product.title}</h2>
       <p>{product.price} $</p>
       <p> {product.description}</p>
-      <button type="button" onClick={handleClose}>
+      <button type="button" data-testid="close-button" onClick={handleClose}>
         Close
       </button>
     </div>

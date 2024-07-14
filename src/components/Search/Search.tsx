@@ -54,7 +54,7 @@ function Search({
   return (
     <div className={styles.searchComponent}>
       <input
-        placeholder="Enter character name"
+        placeholder="Enter product"
         type="text"
         className={styles.searchInput}
         value={searchValue}
