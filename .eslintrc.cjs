@@ -47,4 +47,5 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  ignorePatterns: ["vite.config.ts", "vite.config.d.ts"]
 };
