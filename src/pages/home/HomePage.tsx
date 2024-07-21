@@ -27,6 +27,9 @@ function HomePage() {
     (state: AppRootState) => state.homePage.isLoading
   );
   const limit = useSelector((state: AppRootState) => state.homePage.limit);
+  const searchValue = useSelector(
+    (state: AppRootState) => state.search.searchValue
+  );
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -39,19 +42,13 @@ function HomePage() {
     } else {
       dispatch(setIsLoading(true));
       fetchProducts(
-        `${URL.base}${URL.limit}${limit}${URL.skip}${(currentPage - 1) * limit}`
+        `${URL.base}${URL.limit}${limit}${URL.skip}${(currentPage - 1) * limit}&search=${searchValue}`
       ).then((commodity) => {
         dispatch(setProducts(commodity));
         dispatch(setIsLoading(false));
       });
     }
-  }, [currentPage, dispatch, limit]);
-
-  // const updateProducts = (updatedProducts: Product[], newTotal: number) => {
-  //   dispatch(setProducts(updatedProducts));
-  //   dispatch(setTotalPages(Math.ceil(newTotal / limit)));
-  //   dispatch(setCurrentPage(1));
-  // };
+  }, [currentPage, dispatch, limit, searchValue]);
 
   const handleLimitChange = (newLimit: number) => {
     dispatch(setLimit(newLimit));
