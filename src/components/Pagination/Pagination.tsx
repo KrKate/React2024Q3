@@ -5,11 +5,6 @@ import styles from './Pagination.module.css';
 import { AppRootState } from '../../reducers';
 import { setCurrentPage, setTotalPages } from '../../store/paginationSlice';
 
-// interface PaginationProps {
-//   currentPage: number;
-//   totalPages: number;
-// }
-
 function Pagination() {
   const total = useSelector((state: AppRootState) => state.homePage.total);
   const limit = useSelector((state: AppRootState) => state.homePage.limit);
