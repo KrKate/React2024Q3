@@ -43,12 +43,12 @@ const homePageSlice = createSlice({
         currentPage: action.payload,
       };
     },
-    setTotalPages: (state, action) => {
-      return {
-        ...state,
-        totalPages: action.payload,
-      };
-    },
+    // setTotalPages: (state, action) => {
+    //   return {
+    //     ...state,
+    //     totalPages: action.payload,
+    //   };
+    // },
     setIsDetailsOpen: (state, action) => {
       return {
         ...state,
@@ -70,7 +70,6 @@ export const {
   setIsLoading,
   setLimit,
   setCurrentPage,
-  setTotalPages,
   setIsDetailsOpen,
   setSelectedId,
 } = homePageSlice.actions;

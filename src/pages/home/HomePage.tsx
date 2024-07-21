@@ -6,25 +6,27 @@ import styles from './HomePage.module.css';
 import ErrorButton from '../../components/ErrorButton/ErrorButton';
 import { fetchProducts, URL } from '../../helpers/api';
 import ProductList from '../../components/productList/ProductList';
-import { Product } from '../../models';
 import LimitPage from '../../components/LimitPage/LimitPage';
 import DetailsPage from '../details/DetailsPage';
 import Pagination from '../../components/Pagination/Pagination';
 import Search from '../../components/Search/Search';
 import { AppRootState } from '../../reducers';
 import { setCurrentPage, setTotalPages } from '../../store/paginationSlice';
+import { setIsLoading, setLimit, setProducts } from '../../store/homePageSlice';
 
 function HomePage() {
   const dispatch = useDispatch();
   const currentPage = useSelector(
     (state: AppRootState) => state.pagination.currentPage
   );
-  const total = useSelector(
-    (state: AppRootState) => state.pagination.totalPages
+  const total = useSelector((state: AppRootState) => state.homePage.total);
+  const products = useSelector(
+    (state: AppRootState) => state.homePage.products
   );
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [limit, setLimit] = useState(10);
+  const isLoading = useSelector(
+    (state: AppRootState) => state.homePage.isLoading
+  );
+  const limit = useSelector((state: AppRootState) => state.homePage.limit);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -32,28 +34,27 @@ function HomePage() {
   useEffect(() => {
     const savedProducts = localStorage.getItem('products');
     if (savedProducts) {
-      setProducts(JSON.parse(savedProducts));
-      setIsLoading(false);
+      dispatch(setProducts(JSON.parse(savedProducts)));
+      dispatch(setIsLoading(false));
     } else {
-      setIsLoading(true);
+      dispatch(setIsLoading(true));
       fetchProducts(
         `${URL.base}${URL.limit}${limit}${URL.skip}${(currentPage - 1) * limit}`
       ).then((commodity) => {
-        setProducts(commodity);
-        setIsLoading(false);
+        dispatch(setProducts(commodity));
+        dispatch(setIsLoading(false));
       });
     }
-  }, [currentPage, limit]);
+  }, [currentPage, dispatch, limit]);
 
-  const updateProducts = (updatedProducts: Product[], newTotal: number) => {
-    setProducts(updatedProducts);
-    dispatch(setTotalPages(Math.ceil(newTotal / limit)));
-    dispatch(setCurrentPage(1));
-    localStorage.setItem('products', JSON.stringify(updatedProducts));
-  };
+  // const updateProducts = (updatedProducts: Product[], newTotal: number) => {
+  //   dispatch(setProducts(updatedProducts));
+  //   dispatch(setTotalPages(Math.ceil(newTotal / limit)));
+  //   dispatch(setCurrentPage(1));
+  // };
 
   const handleLimitChange = (newLimit: number) => {
-    setLimit(newLimit);
+    dispatch(setLimit(newLimit));
     dispatch(setTotalPages(Math.ceil(total / limit)));
     dispatch(setCurrentPage(1));
   };
@@ -80,7 +81,7 @@ function HomePage() {
         <ErrorButton />
       </div>
       <div className={styles.searchContainer}>
-        <Search updateProducts={updateProducts} />
+        <Search />
       </div>
       <div className={styles.mainContainer}>
         <div className={styles.cardsContainer}>

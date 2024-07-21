@@ -1,47 +1,48 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';
 import { fetchProducts, URL } from '../../helpers/api';
-import { Product } from '../../models';
+import { AppRootState } from '../../reducers';
+import { setSearchTotal, setSearchValue } from '../../store/searchSlice';
+import { setIsLoading, setProducts } from '../../store/homePageSlice';
+import { setTotalPages } from '../../store/paginationSlice';
 
-function Search({
-  updateProducts,
-}: {
-  updateProducts: (updatedProducts: Product[], newTotal: number) => void;
-}) {
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [total] = useState(194);
-  const [limit] = useState(10);
-  const [, setTotalPages] = useState(total / limit);
-  const [, setSearchTotal] = useState(0);
+function Search() {
+  const searchValue = useSelector(
+    (state: AppRootState) => state.search.searchValue
+  );
+  const isLoading = useSelector(
+    (state: AppRootState) => state.homePage.isLoading
+  );
+  const limit = useSelector((state: AppRootState) => state.homePage.limit);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const savedValue = localStorage.getItem('searchValue');
     if (savedValue) {
-      setSearchValue(savedValue);
+      dispatch(setSearchValue(savedValue));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     localStorage.setItem('searchValue', searchValue);
   }, [searchValue]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+    dispatch(setSearchValue(event.target.value));
   };
 
   const handleSearch = () => {
-    localStorage.setItem('searchValue', searchValue);
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
     fetchProducts(`${URL.base}${URL.search}${searchValue}`)
       .then((products) => {
-        updateProducts(products, products.length);
-        setSearchTotal(products.length);
-        setTotalPages(Math.ceil(products.length / limit));
+        dispatch(setProducts(products));
+        dispatch(setSearchTotal(products.length));
+        dispatch(setTotalPages(Math.ceil(products.length / limit)));
       })
       .finally(() => {
-        setIsLoading(false);
+        dispatch(setIsLoading(false));
       });
   };
 
