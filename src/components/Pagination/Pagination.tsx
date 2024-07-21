@@ -6,7 +6,9 @@ import { AppRootState } from '../../reducers';
 import { setCurrentPage, setTotalPages } from '../../store/paginationSlice';
 
 function Pagination() {
-  const total = useSelector((state: AppRootState) => state.homePage.total);
+  const allProducts = useSelector(
+    (state: AppRootState) => state.homePage.total
+  );
   const limit = useSelector((state: AppRootState) => state.homePage.limit);
   const totalPages = useSelector(
     (state: AppRootState) => state.pagination.totalPages
@@ -17,8 +19,8 @@ function Pagination() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setTotalPages(Math.ceil(total / limit)));
-  }, [total, limit, dispatch]);
+    dispatch(setTotalPages(Math.ceil(allProducts / limit)));
+  }, [allProducts, limit, dispatch]);
 
   const handlePageChange = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber));
