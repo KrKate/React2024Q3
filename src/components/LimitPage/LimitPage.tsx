@@ -1,16 +1,21 @@
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './LimitPage.module.css';
+import { setCurrentPage, setLimit } from '../../store/homePageSlice';
+import { setTotalPages } from '../../store/paginationSlice';
+import { AppRootState } from '../../reducers';
 
-type LimitPageProps = {
-  handleLimitChange: (limit: number) => void;
-};
-
-function LimitPage({ handleLimitChange }: LimitPageProps) {
+function LimitPage() {
+  const total = useSelector((state: AppRootState) => state.homePage.total);
+  const limit = useSelector((state: AppRootState) => state.homePage.limit);
+  const dispatch = useDispatch();
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handleLimitChange(parseInt(e.target.value, 10));
+    dispatch(setLimit(parseInt(e.target.value, 10)));
+    dispatch(setTotalPages(Math.ceil(total / limit)));
+    dispatch(setCurrentPage(1));
   };
 
   return (
-    <div className={styles.limitContainer}>
+    <section className={styles.limitContainer}>
       <label htmlFor="limit">
         Items:
         <select id="limit" onChange={handleSelectChange} defaultValue="10">
@@ -20,7 +25,7 @@ function LimitPage({ handleLimitChange }: LimitPageProps) {
           <option value="20">20</option>
         </select>
       </label>
-    </div>
+    </section>
   );
 }
 

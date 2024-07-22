@@ -11,15 +11,13 @@ import DetailsPage from '../details/DetailsPage';
 import Pagination from '../../components/Pagination/Pagination';
 import Search from '../../components/Search/Search';
 import { AppRootState } from '../../reducers';
-import { setCurrentPage, setTotalPages } from '../../store/paginationSlice';
-import { setIsLoading, setLimit, setProducts } from '../../store/homePageSlice';
+import { setIsLoading, setProducts } from '../../store/homePageSlice';
 
 function HomePage() {
   const dispatch = useDispatch();
   const currentPage = useSelector(
     (state: AppRootState) => state.pagination.currentPage
   );
-  const total = useSelector((state: AppRootState) => state.homePage.total);
   const products = useSelector(
     (state: AppRootState) => state.homePage.products
   );
@@ -50,12 +48,6 @@ function HomePage() {
     }
   }, [currentPage, dispatch, limit, searchValue]);
 
-  const handleLimitChange = (newLimit: number) => {
-    dispatch(setLimit(newLimit));
-    dispatch(setTotalPages(Math.ceil(total / limit)));
-    dispatch(setCurrentPage(1));
-  };
-
   const toggleDetails = (id: number) => {
     if (selectedId === id) {
       setIsDetailsOpen(false);
@@ -73,15 +65,15 @@ function HomePage() {
   };
 
   return (
-    <div>
-      <div className={styles.errorContainer}>
+    <>
+      <aside className={styles.errorContainer}>
         <ErrorButton />
-      </div>
-      <div className={styles.searchContainer}>
+      </aside>
+      <section className={styles.searchContainer}>
         <Search />
-      </div>
-      <div className={styles.mainContainer}>
-        <div className={styles.cardsContainer}>
+      </section>
+      <main className={styles.mainContainer}>
+        <section className={styles.cardsContainer}>
           {isLoading && !products.length ? (
             <Loader />
           ) : (
@@ -91,14 +83,14 @@ function HomePage() {
               page={currentPage}
             />
           )}
-        </div>
+        </section>
         {isDetailsOpen && (
           <DetailsPage id={selectedId} onClose={handleCloseDetails} />
         )}
-      </div>
-      <LimitPage handleLimitChange={handleLimitChange} />
+      </main>
+      <LimitPage />
       <Pagination />
-    </div>
+    </>
   );
 }
 

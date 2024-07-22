@@ -53,7 +53,7 @@ function Search() {
   };
 
   return (
-    <div className={styles.searchComponent}>
+    <form className={styles.searchComponent}>
       <input
         placeholder="Enter product"
         type="text"
@@ -70,7 +70,7 @@ function Search() {
         Search
       </button>
       {isLoading && <Loader />}
-    </div>
+    </form>
   );
 }
 

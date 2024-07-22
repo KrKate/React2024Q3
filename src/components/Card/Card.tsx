@@ -11,19 +11,19 @@ function Card({ product, toggleDetails }: CardProps): JSX.Element {
     toggleDetails(product.id);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Enter') {
       toggleDetails(product.id);
     }
   };
 
   return (
-    <div
+    <button
       className={styles.characterCard}
       onClick={handleCardClick}
       onKeyDown={handleKeyDown}
-      role="button"
       tabIndex={0}
+      type="button"
       data-testid="cardTest"
     >
       <img
@@ -34,7 +34,7 @@ function Card({ product, toggleDetails }: CardProps): JSX.Element {
       />
       <h2>{product.title}</h2>
       <div>{product.price} $</div>
-    </div>
+    </button>
   );
 }
 
