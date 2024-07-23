@@ -16,11 +16,7 @@ const router = createBrowserRouter(
         element={<Outlet />}
         errorElement={<ErrorPage />}
       >
-        <Route
-          index
-          element={<DetailsPage id={1} onClose={() => {}} />}
-          errorElement={<ErrorPage />}
-        />
+        <Route index element={<DetailsPage />} errorElement={<ErrorPage />} />
       </Route>
       <Route path="/*" element={<ErrorPage />} errorElement={<ErrorPage />} />
     </Route>

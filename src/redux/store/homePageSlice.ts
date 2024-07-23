@@ -5,6 +5,7 @@ const homePageSlice = createSlice({
   initialState: {
     total: 194,
     products: [],
+    product: null,
     isLoading: true,
     limit: 10,
     currentPage: 1,
@@ -25,6 +26,12 @@ const homePageSlice = createSlice({
         products: action.payload,
       };
     },
+    setProduct: (state, action) => {
+      return {
+        ...state,
+        product: action.payload,
+      };
+    },
     setIsLoading: (state, action) => {
       return {
         ...state,
@@ -43,12 +50,6 @@ const homePageSlice = createSlice({
         currentPage: action.payload,
       };
     },
-    // setTotalPages: (state, action) => {
-    //   return {
-    //     ...state,
-    //     totalPages: action.payload,
-    //   };
-    // },
     setIsDetailsOpen: (state, action) => {
       return {
         ...state,
@@ -67,6 +68,7 @@ const homePageSlice = createSlice({
 export const {
   setTotal,
   setProducts,
+  setProduct,
   setIsLoading,
   setLimit,
   setCurrentPage,

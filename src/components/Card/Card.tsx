@@ -1,12 +1,28 @@
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Card.module.css';
 import { Product } from '../../models';
+import { AppRootState } from '../../redux/reducers';
+import {
+  setIsDetailsOpen,
+  setSelectedId,
+} from '../../redux/store/homePageSlice';
 
-interface CardProps {
-  product: Product;
-  toggleDetails: (id: number) => void;
-}
+function Card({ product }: { product: Product }): JSX.Element {
+  const dispatch = useDispatch();
+  const selectedId = useSelector(
+    (state: AppRootState) => state.homePage.selectedId
+  );
 
-function Card({ product, toggleDetails }: CardProps): JSX.Element {
+  const toggleDetails = (id: number) => {
+    if (selectedId === id) {
+      dispatch(setIsDetailsOpen(false));
+      dispatch(setSelectedId(null));
+    } else {
+      dispatch(setIsDetailsOpen(true));
+      dispatch(setSelectedId(id));
+    }
+  };
+
   const handleCardClick = () => {
     toggleDetails(product.id);
   };

@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import styles from './Pagination.module.css';
-import { AppRootState } from '../../reducers';
-import { setCurrentPage, setTotalPages } from '../../store/paginationSlice';
+import { AppRootState } from '../../redux/reducers';
+import {
+  setCurrentPage,
+  setTotalPages,
+} from '../../redux/store/paginationSlice';
 import { fetchProducts, URL } from '../../helpers/api';
-import { setProducts } from '../../store/homePageSlice';
+import { setProducts } from '../../redux/store/homePageSlice';
 
 function Pagination() {
   const allProducts = useSelector(

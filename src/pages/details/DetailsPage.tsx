@@ -1,22 +1,33 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styles from './DetailsPage.module.css';
-import { Product } from '../../models';
 import { fetchDetails, URL } from '../../helpers/api';
+import { Product } from '../../models';
+import { AppRootState } from '../../redux/reducers';
+import {
+  setIsDetailsOpen,
+  setProduct,
+  setSelectedId,
+} from '../../redux/store/homePageSlice';
 
-interface DetailsProps {
-  id: number | null;
-  onClose: () => void;
-}
-
-function DetailsPage({ id, onClose }: DetailsProps): JSX.Element {
-  const [product, setProduct] = useState<Product | null>(null);
+function DetailsPage() {
+  const id = useSelector((state: AppRootState) => state.homePage.selectedId);
+  const product = useSelector(
+    (state: AppRootState) => state.homePage.product
+  ) as unknown as Product;
+  const currentPage = useSelector(
+    (state: AppRootState) => state.homePage.currentPage
+  );
+  const dispatch = useDispatch();
   const detailsRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
         const response = await fetchDetails(`${URL.base}/${id}`);
-        setProduct(response);
+        dispatch(setProduct(response));
       } catch (error) {
         console.error('Error fetching product data:', error);
       }
@@ -24,11 +35,14 @@ function DetailsPage({ id, onClose }: DetailsProps): JSX.Element {
     if (id) {
       fetchProductData();
     }
-  }, [id]);
+  }, [id, dispatch]);
 
   const handleClose = useCallback(() => {
-    onClose();
-  }, [onClose]);
+    dispatch(setProduct(null));
+    dispatch(setIsDetailsOpen(false));
+    dispatch(setSelectedId(null));
+    navigate(`/page=${currentPage}`);
+  }, [currentPage, dispatch, navigate]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

@@ -1,68 +1,54 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader/Loader';
 import styles from './HomePage.module.css';
 import ErrorButton from '../../components/ErrorButton/ErrorButton';
-import { fetchProducts, URL } from '../../helpers/api';
 import ProductList from '../../components/productList/ProductList';
 import LimitPage from '../../components/LimitPage/LimitPage';
 import DetailsPage from '../details/DetailsPage';
 import Pagination from '../../components/Pagination/Pagination';
 import Search from '../../components/Search/Search';
-import { AppRootState } from '../../reducers';
-import { setIsLoading, setProducts } from '../../store/homePageSlice';
+import { AppRootState } from '../../redux/reducers';
+// import { setIsLoading, setProducts } from '../../redux/store/homePageSlice';
+import { useFetchProductsQuery } from '../../redux/store/apiSlice';
 
 function HomePage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const currentPage = useSelector(
     (state: AppRootState) => state.pagination.currentPage
   );
-  const products = useSelector(
-    (state: AppRootState) => state.homePage.products
-  );
-  const isLoading = useSelector(
-    (state: AppRootState) => state.homePage.isLoading
-  );
+  // const products = useSelector(
+  //   (state: AppRootState) => state.homePage.products
+  // );
+  // const isLoading = useSelector(
+  //   (state: AppRootState) => state.homePage.isLoading
+  // );
   const limit = useSelector((state: AppRootState) => state.homePage.limit);
   const searchValue = useSelector(
     (state: AppRootState) => state.search.searchValue
   );
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const navigate = useNavigate();
+  const isDetailsOpen = useSelector(
+    (state: AppRootState) => state.homePage.isDetailsOpen
+  );
 
-  useEffect(() => {
-    const savedProducts = localStorage.getItem('products');
-    if (savedProducts) {
-      dispatch(setProducts(JSON.parse(savedProducts)));
-      dispatch(setIsLoading(false));
-    } else {
-      dispatch(setIsLoading(true));
-      fetchProducts(
-        `${URL.base}${URL.limit}${limit}${URL.skip}${(currentPage - 1) * limit}&search=${searchValue}`
-      ).then((commodity) => {
-        dispatch(setProducts(commodity));
-        dispatch(setIsLoading(false));
-      });
-    }
-  }, [currentPage, dispatch, limit, searchValue]);
+  const {
+    data: products = [],
+    error,
+    isLoading,
+  } = useFetchProductsQuery({
+    limit,
+    skip: (currentPage - 1) * limit,
+    search: searchValue,
+  });
 
-  const toggleDetails = (id: number) => {
-    if (selectedId === id) {
-      setIsDetailsOpen(false);
-      setSelectedId(null);
-    } else {
-      setIsDetailsOpen(true);
-      setSelectedId(id);
-    }
-  };
+  // Если данные загружаются и нет продуктов, показываем Loader
+  if (isLoading && (!products || products.length === 0)) {
+    return <Loader />;
+  }
 
-  const handleCloseDetails = () => {
-    setIsDetailsOpen(false);
-    setSelectedId(null);
-    navigate(`/page=${currentPage}`);
-  };
+  // Обработка ошибок
+  if (error) {
+    return <div>Error loading products</div>;
+  }
 
   return (
     <>
@@ -74,19 +60,9 @@ function HomePage() {
       </section>
       <main className={styles.mainContainer}>
         <section className={styles.cardsContainer}>
-          {isLoading && !products.length ? (
-            <Loader />
-          ) : (
-            <ProductList
-              products={products}
-              toggleDetails={toggleDetails}
-              page={currentPage}
-            />
-          )}
+          {isLoading && !products.length ? <Loader /> : <ProductList />}
         </section>
-        {isDetailsOpen && (
-          <DetailsPage id={selectedId} onClose={handleCloseDetails} />
-        )}
+        {isDetailsOpen && <DetailsPage />}
       </main>
       <LimitPage />
       <Pagination />

@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';
 import { fetchProducts, URL } from '../../helpers/api';
-import { AppRootState } from '../../reducers';
-import { setSearchTotal, setSearchValue } from '../../store/searchSlice';
-import { setIsLoading, setProducts } from '../../store/homePageSlice';
-import { setTotalPages } from '../../store/paginationSlice';
+import { AppRootState } from '../../redux/reducers';
+import { setSearchTotal, setSearchValue } from '../../redux/store/searchSlice';
+import { setIsLoading, setProducts } from '../../redux/store/homePageSlice';
+import { setTotalPages } from '../../redux/store/paginationSlice';
 
 function Search() {
   const searchValue = useSelector(
