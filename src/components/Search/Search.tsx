@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import * as React from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';

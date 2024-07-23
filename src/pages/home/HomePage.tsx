@@ -8,45 +8,31 @@ import DetailsPage from '../details/DetailsPage';
 import Pagination from '../../components/Pagination/Pagination';
 import Search from '../../components/Search/Search';
 import { AppRootState } from '../../redux/reducers';
-// import { setIsLoading, setProducts } from '../../redux/store/homePageSlice';
 import { useFetchProductsQuery } from '../../redux/store/apiSlice';
 
 function HomePage() {
-  // const dispatch = useDispatch();
   const currentPage = useSelector(
     (state: AppRootState) => state.pagination.currentPage
   );
-  // const products = useSelector(
-  //   (state: AppRootState) => state.homePage.products
-  // );
-  // const isLoading = useSelector(
-  //   (state: AppRootState) => state.homePage.isLoading
-  // );
   const limit = useSelector((state: AppRootState) => state.homePage.limit);
-  const searchValue = useSelector(
-    (state: AppRootState) => state.search.searchValue
-  );
   const isDetailsOpen = useSelector(
     (state: AppRootState) => state.homePage.isDetailsOpen
   );
 
   const {
     data: products = [],
-    error,
+    isError,
     isLoading,
   } = useFetchProductsQuery({
     limit,
     skip: (currentPage - 1) * limit,
-    search: searchValue,
   });
 
-  // Если данные загружаются и нет продуктов, показываем Loader
   if (isLoading && (!products || products.length === 0)) {
     return <Loader />;
   }
 
-  // Обработка ошибок
-  if (error) {
+  if (isError) {
     return <div>Error loading products</div>;
   }
 
