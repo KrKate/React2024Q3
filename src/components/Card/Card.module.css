@@ -1,13 +1,13 @@
 .characterCard {
   width: 200px;
-  height: 230px;
+  height: 250px;
   background-color: rgb(178, 178, 180);
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
   border: none;
-  gap: 1rem;
+  gap: 0.7rem;
   align-items: center;
   text-align: center;
   justify-content: center;

@@ -7,8 +7,9 @@ import {
   setCurrentPage,
   setTotalPages,
 } from '../../redux/store/paginationSlice';
-import { fetchProducts, URL } from '../../helpers/api';
 import { setProducts } from '../../redux/store/homePageSlice';
+import { useFetchPaginationQuery } from '../../redux/store/apiSlice';
+import Loader from '../Loader/Loader';
 
 function Pagination() {
   const allProducts = useSelector(
@@ -25,22 +26,30 @@ function Pagination() {
     (state: AppRootState) => state.search.searchValue
   );
   const dispatch = useDispatch();
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useFetchPaginationQuery({ searchValue, limit, pageNumber: currentPage });
 
   useEffect(() => {
     dispatch(setTotalPages(Math.ceil(allProducts / limit)));
   }, [allProducts, limit, dispatch]);
 
-  const handlePageChange = (pageNumber: number) => {
-    console.log(`Search value:${searchValue}`);
-    dispatch(setCurrentPage(pageNumber));
-    fetchProducts(
-      `${URL.base}${URL.search}${searchValue}&limit=${limit}&skip=${(pageNumber - 1) * limit}`
-    ).then((products) => {
+  useEffect(() => {
+    if (products) {
       dispatch(setProducts(products));
-    });
+    }
+  }, [products, dispatch]);
+
+  const handlePageChange = (pageNumber: number) => {
+    dispatch(setCurrentPage(pageNumber));
   };
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  if (isLoading) return <Loader />;
+  if (isError) return <div>Error loading products</div>;
 
   return (
     <div className={styles.pagination}>
@@ -51,7 +60,12 @@ function Pagination() {
           className={currentPage === page ? styles.active : ''}
           onClick={() => handlePageChange(page)}
         >
-          <button type="button">{page}</button>
+          <button
+            type="button"
+            className={currentPage === page ? styles.active : ''}
+          >
+            {page}
+          </button>
         </Link>
       ))}
     </div>

@@ -1,21 +1,20 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { skipToken } from '@reduxjs/toolkit/query/react';
 import styles from './DetailsPage.module.css';
-import { fetchDetails, URL } from '../../helpers/api';
-import { Product } from '../../models';
 import { AppRootState } from '../../redux/reducers';
 import {
   setIsDetailsOpen,
   setProduct,
   setSelectedId,
 } from '../../redux/store/homePageSlice';
+import { useFetchDetailsQuery } from '../../redux/store/apiSlice';
 
 function DetailsPage() {
-  const id = useSelector((state: AppRootState) => state.homePage.selectedId);
-  const product = useSelector(
-    (state: AppRootState) => state.homePage.product
-  ) as unknown as Product;
+  const id: number | null = useSelector(
+    (state: AppRootState) => state.homePage.selectedId
+  );
   const currentPage = useSelector(
     (state: AppRootState) => state.homePage.currentPage
   );
@@ -23,19 +22,7 @@ function DetailsPage() {
   const detailsRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchProductData = async () => {
-      try {
-        const response = await fetchDetails(`${URL.base}/${id}`);
-        dispatch(setProduct(response));
-      } catch (error) {
-        console.error('Error fetching product data:', error);
-      }
-    };
-    if (id) {
-      fetchProductData();
-    }
-  }, [id, dispatch]);
+  const { data: product } = useFetchDetailsQuery(id !== null ? id : skipToken);
 
   const handleClose = useCallback(() => {
     dispatch(setProduct(null));

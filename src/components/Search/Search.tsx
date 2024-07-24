@@ -3,11 +3,9 @@ import { ChangeEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
 import styles from './Search.module.css';
-import { fetchProducts, URL } from '../../helpers/api';
 import { AppRootState } from '../../redux/reducers';
-import { setSearchTotal, setSearchValue } from '../../redux/store/searchSlice';
-import { setIsLoading, setProducts } from '../../redux/store/homePageSlice';
-import { setTotalPages } from '../../redux/store/paginationSlice';
+import { setSearchValue } from '../../redux/store/searchSlice';
+import { setIsLoading } from '../../redux/store/homePageSlice';
 
 function Search() {
   const searchValue = useSelector(
@@ -16,7 +14,7 @@ function Search() {
   const isLoading = useSelector(
     (state: AppRootState) => state.homePage.isLoading
   );
-  const limit = useSelector((state: AppRootState) => state.homePage.limit);
+  // const limit = useSelector((state: AppRootState) => state.homePage.limit);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,15 +34,9 @@ function Search() {
 
   const handleSearch = () => {
     dispatch(setIsLoading(true));
-    fetchProducts(`${URL.base}${URL.search}${searchValue}`)
-      .then((products) => {
-        dispatch(setProducts(products));
-        dispatch(setSearchTotal(products.length));
-        dispatch(setTotalPages(Math.ceil(products.length / limit)));
-      })
-      .finally(() => {
-        dispatch(setIsLoading(false));
-      });
+    // Здесь вы можете вызвать fetchProducts, но лучше использовать useFetchPaginationQuery
+    // Это будет сделано в компоненте ProductList
+    dispatch(setIsLoading(false));
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {

@@ -21,6 +21,22 @@ export const apiSliceProducts = createApi({
     fetchDetails: builder.query<Product, { id: number }>({
       query: (id) => `${URL.products}/${id}`,
     }),
+    fetchSearch: builder.query<Product[], { search: string }>({
+      query: (searchValue) => `${URL.products}${URL.search}${searchValue}`,
+    }),
+    fetchPagination: builder.query<
+      Product[],
+      { searchValue: string; limit: number; pageNumber: number }
+    >({
+      query: ({ searchValue, limit, pageNumber }) => {
+        return `${URL.products}${URL.search}${searchValue}${URL.limit}${limit}${URL.skip}${(pageNumber - 1) * limit}`;
+      },
+    }),
   }),
 });
-export const { useFetchProductsQuery } = apiSliceProducts;
+export const {
+  useFetchProductsQuery,
+  useFetchDetailsQuery,
+  useFetchPaginationQuery,
+  useFetchSearchQuery,
+} = apiSliceProducts;
