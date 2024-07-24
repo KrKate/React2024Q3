@@ -7,7 +7,7 @@ import {
   setSelectedId,
 } from '../../redux/store/homePageSlice';
 
-function Card({ product }: { product: Product }): JSX.Element {
+function Card({ product }: { product: Product }) {
   const dispatch = useDispatch();
   const selectedId = useSelector(
     (state: AppRootState) => state.homePage.selectedId
