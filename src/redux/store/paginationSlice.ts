@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  currentPage: 1,
+  totalPages: 1,
+};
+
 const paginationSlice = createSlice({
   name: 'pagination',
-  initialState: { currentPage: 1, totalPages: 1 },
+  initialState,
   reducers: {
     setCurrentPage: (state, action) => {
       return {

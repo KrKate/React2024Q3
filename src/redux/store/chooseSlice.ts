@@ -4,13 +4,13 @@ interface ChooseState {
   chosenProducts: number[];
 }
 
-const chosenProducts: ChooseState = {
+export const initialState: ChooseState = {
   chosenProducts: [],
 };
 
 const chooseSlice = createSlice({
   name: 'choose',
-  initialState: chosenProducts,
+  initialState,
   reducers: {
     toggleProduct: (state, action: PayloadAction<number>) => {
       const productId = action.payload;

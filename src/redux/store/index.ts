@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Store } from '@reduxjs/toolkit';
 import { rootReducer } from '../reducers';
 import { apiSliceProducts } from './apiSlice';
 
-const store = configureStore({
+const store: Store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSliceProducts.middleware),

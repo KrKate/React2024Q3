@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const initialState = {
+  total: 194,
+  products: [],
+  product: null,
+  isLoading: true,
+  limit: 10,
+  currentPage: 1,
+  totalPages: 0,
+  isDetailsOpen: false,
+  selectedId: null,
+};
+
 const homePageSlice = createSlice({
   name: 'homePage',
-  initialState: {
-    total: 194,
-    products: [],
-    product: null,
-    isLoading: true,
-    limit: 10,
-    currentPage: 1,
-    totalPages: 0,
-    isDetailsOpen: false,
-    selectedId: null,
-  },
+  initialState,
   reducers: {
     setTotal: (state, action) => {
       return {

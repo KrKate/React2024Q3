@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import homePageReducer from '../store/homePageSlice';
 import paginationReducer from '../store/paginationSlice';
 import searchReducer from '../store/searchSlice';
 import chooseReducer from '../store/chooseSlice';
 import { apiSliceProducts } from '../store/apiSlice';
 
-export const rootReducer = combineReducers({
+export const rootReducer: Reducer = combineReducers({
   homePage: homePageReducer,
   pagination: paginationReducer,
   search: searchReducer,
