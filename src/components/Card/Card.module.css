@@ -1,6 +1,6 @@
 .characterCard {
   width: 200px;
-  height: 250px;
+  height: 340px;
   background-color: rgb(178, 178, 180);
   padding: 0.5rem;
   display: flex;
@@ -32,4 +32,21 @@ li {
 .images {
   height: 50%;
   padding: 0;
+}
+
+.chooseButton {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 20px;
+  transition: all 0.3s linear;
+  margin-top: auto;
+  width: 70%;
+}
+
+.chooseButton:hover {
+  background-color: #82ee3f;
+}
+
+.chosen {
+  background-color: #89e94d;
 }

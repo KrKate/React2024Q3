@@ -6,12 +6,17 @@ import {
   setIsDetailsOpen,
   setSelectedId,
 } from '../../redux/store/homePageSlice';
+import { toggleProduct } from '../../redux/store/chooseSlice';
 
 function Card({ product }: { product: Product }) {
   const dispatch = useDispatch();
   const selectedId = useSelector(
     (state: AppRootState) => state.homePage.selectedId
   );
+  const chosenProducts = useSelector(
+    (state: AppRootState) => state.choose.chosenProducts
+  );
+  const isChosen = chosenProducts.includes(product.id);
 
   const toggleDetails = (id: number) => {
     if (selectedId === id) {
@@ -27,19 +32,25 @@ function Card({ product }: { product: Product }) {
     toggleDetails(product.id);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
       toggleDetails(product.id);
     }
   };
 
+  const toggleChoose = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    dispatch(toggleProduct(product.id));
+  };
+  console.log(chosenProducts.length);
   return (
-    <button
+    <div
       className={styles.characterCard}
       onClick={handleCardClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      type="button"
+      role="button"
       data-testid="cardTest"
     >
       <img
@@ -50,7 +61,14 @@ function Card({ product }: { product: Product }) {
       />
       <h2>{product.title}</h2>
       <div>{product.price} $</div>
-    </button>
+      <button
+        type="button"
+        className={`${styles.chooseButton} ${isChosen ? styles.chosen : ''}`}
+        onClick={toggleChoose}
+      >
+        {isChosen ? 'Chosen' : 'Choose me!'}
+      </button>
+    </div>
   );
 }
 
