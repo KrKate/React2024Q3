@@ -1,6 +1,6 @@
 import styles from './Loader.module.css';
 
-function Loader(): JSX.Element {
+function Loader() {
   return <div className={styles.loader}>Loading...</div>;
 }
 

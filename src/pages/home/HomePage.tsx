@@ -9,6 +9,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import Search from '../../components/Search/Search';
 import { AppRootState } from '../../redux/reducers';
 import { useFetchProductsQuery } from '../../redux/store/apiSlice';
+import Footer from '../../components/Footer/Footer';
 
 function HomePage() {
   const currentPage = useSelector(
@@ -52,6 +53,7 @@ function HomePage() {
       </main>
       <LimitPage />
       <Pagination />
+      <Footer />
     </>
   );
 }
