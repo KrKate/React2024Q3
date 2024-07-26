@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader/Loader';
 import styles from './HomePage.module.css';
-import ErrorButton from '../../components/ErrorButton/ErrorButton';
 import ProductList from '../../components/productList/ProductList';
 import LimitPage from '../../components/LimitPage/LimitPage';
 import DetailsPage from '../details/DetailsPage';
@@ -39,9 +38,6 @@ function HomePage() {
 
   return (
     <>
-      <aside className={styles.errorContainer}>
-        <ErrorButton />
-      </aside>
       <section className={styles.searchContainer}>
         <Search />
       </section>
