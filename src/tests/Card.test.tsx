@@ -3,8 +3,7 @@ import { Provider } from 'react-redux';
 import { configureStore, Store } from '@reduxjs/toolkit';
 import Card from '../components/Card/Card';
 import { Product } from '../models';
-
-import { rootReducer } from '../redux/reducers/index';
+import { rootReducer } from '../redux/reducers';
 import { setIsDetailsOpen, setSelectedId } from '../redux/store/homePageSlice';
 
 describe('Card component', () => {

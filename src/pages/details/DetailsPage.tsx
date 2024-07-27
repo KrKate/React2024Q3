@@ -22,7 +22,9 @@ function DetailsPage() {
   const detailsRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
-  const { data: product } = useFetchDetailsQuery(id !== null ? id : skipToken);
+  const { data: product } = useFetchDetailsQuery(
+    id !== null ? { id } : skipToken
+  );
 
   const handleClose = useCallback(() => {
     dispatch(setProduct(null));

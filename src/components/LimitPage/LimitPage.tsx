@@ -21,7 +21,12 @@ function LimitPage() {
     <section className={styles.limitContainer}>
       <label htmlFor="limit">
         Items:
-        <select id="limit" onChange={handleSelectChange} defaultValue="10">
+        <select
+          id="limit"
+          onChange={handleSelectChange}
+          defaultValue="10"
+          data-testid="limit-select"
+        >
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>

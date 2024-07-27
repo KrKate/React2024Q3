@@ -26,7 +26,7 @@ export const apiSliceProducts = createApi({
       },
     }),
     fetchDetails: builder.query<Product, { id: number }>({
-      query: (id) => `${URL.products}/${id}`,
+      query: ({ id }) => `${URL.products}/${id}`,
     }),
     fetchPagination: builder.query<
       Product[],
