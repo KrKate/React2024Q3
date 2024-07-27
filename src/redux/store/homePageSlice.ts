@@ -46,12 +46,6 @@ const homePageSlice = createSlice({
         limit: action.payload,
       };
     },
-    setCurrentPage: (state, action) => {
-      return {
-        ...state,
-        currentPage: action.payload,
-      };
-    },
     setIsDetailsOpen: (state, action) => {
       return {
         ...state,
@@ -73,7 +67,6 @@ export const {
   setProduct,
   setIsLoading,
   setLimit,
-  setCurrentPage,
   setIsDetailsOpen,
   setSelectedId,
 } = homePageSlice.actions;

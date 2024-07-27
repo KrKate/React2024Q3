@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './LimitPage.module.css';
-import { setCurrentPage, setLimit } from '../../redux/store/homePageSlice';
-import { setTotalPages } from '../../redux/store/paginationSlice';
+import { setLimit } from '../../redux/store/homePageSlice';
+import {
+  setCurrentPage,
+  setTotalPages,
+} from '../../redux/store/paginationSlice';
 import { AppRootState } from '../../redux/reducers';
 
 function LimitPage() {
