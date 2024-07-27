@@ -9,8 +9,11 @@ import Search from '../../components/Search/Search';
 import { AppRootState } from '../../redux/reducers';
 import { useFetchProductsQuery } from '../../redux/store/apiSlice';
 import Footer from '../../components/Footer/Footer';
+import useTheme from '../../context/contextHook';
+import ThemeToggleButton from '../../components/ThemeButton/ThemeButton';
 
 function HomePage() {
+  const { isDarkMode } = useTheme();
   const currentPage = useSelector(
     (state: AppRootState) => state.pagination.currentPage
   );
@@ -38,10 +41,13 @@ function HomePage() {
 
   return (
     <>
+      <ThemeToggleButton />
       <section className={styles.searchContainer}>
         <Search />
       </section>
-      <main className={styles.mainContainer}>
+      <main
+        className={`${styles.mainContainer} ${isDarkMode ? styles.dark : styles.light}`}
+      >
         <section className={styles.cardsContainer}>
           {isLoading && !products.length ? <Loader /> : <ProductList />}
         </section>
