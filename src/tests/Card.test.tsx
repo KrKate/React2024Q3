@@ -59,13 +59,24 @@ describe('Card component', () => {
   it('toggles product selection when button is clicked', () => {
     const store = configureStore({ reducer: rootReducer });
     const { getByText } = renderWithStore(store);
-
     const buttonElement = getByText('Choose me!');
-
     fireEvent.click(buttonElement);
-
     const { chosenProducts } = store.getState().choose;
-    expect(chosenProducts).toContain(mockProduct.id);
+    expect(chosenProducts).toContainEqual({
+      id: mockProduct.id,
+      title: mockProduct.title,
+      price: mockProduct.price,
+      description: mockProduct.description,
+    });
+    fireEvent.click(buttonElement);
+    const updatedChosenProducts = store.getState().choose.chosenProducts;
+
+    expect(updatedChosenProducts).not.toContainEqual({
+      id: mockProduct.id,
+      title: mockProduct.title,
+      price: mockProduct.price,
+      description: mockProduct.description,
+    });
   });
 
   it('handles keyboard events correctly', () => {

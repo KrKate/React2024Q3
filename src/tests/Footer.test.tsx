@@ -2,9 +2,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import createMockStore from 'redux-mock-store';
 import Footer from '../components/Footer/Footer';
-import { initialState, unselectAllProducts } from '../redux/store/chooseSlice';
+import {
+  initialState,
+  ProductInfo,
+  unselectAllProducts,
+} from '../redux/store/chooseSlice';
 
-const mockStore = createMockStore<{ choose: { chosenProducts: number[] } }>();
+const mockStore = createMockStore<{
+  choose: { chosenProducts: ProductInfo[] };
+}>();
 
 describe('Footer component', () => {
   it('renders the unselected all button', () => {
@@ -25,7 +31,11 @@ describe('Footer component', () => {
   });
 
   it('renders the correct number of chosen products', () => {
-    const chosenProducts = [1, 2, 3];
+    const chosenProducts: ProductInfo[] = [
+      { id: 1, title: 'Product 1', price: 100, description: 'Description 1' },
+      { id: 2, title: 'Product 2', price: 200, description: 'Description 2' },
+      { id: 3, title: 'Product 3', price: 300, description: 'Description 3' },
+    ];
     const store = mockStore({
       choose: { chosenProducts },
     });

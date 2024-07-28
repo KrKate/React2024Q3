@@ -41,9 +41,16 @@ function Card({ product }: { product: Product }) {
   const toggleChoose = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
-    dispatch(toggleProduct(product.id));
+    dispatch(
+      toggleProduct({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        description: product.description,
+      })
+    );
   };
-  console.log(chosenProducts.length);
+
   return (
     <div
       className={styles.characterCard}
