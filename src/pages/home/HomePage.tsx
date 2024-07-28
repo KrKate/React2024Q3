@@ -40,14 +40,12 @@ function HomePage() {
   }
 
   return (
-    <>
+    <section className={`${isDarkMode ? styles.dark : styles.light}`}>
       <ThemeToggleButton />
       <section className={styles.searchContainer}>
         <Search />
       </section>
-      <main
-        className={`${styles.mainContainer} ${isDarkMode ? styles.dark : styles.light}`}
-      >
+      <main className={styles.mainContainer}>
         <section className={styles.cardsContainer}>
           {isLoading && !products.length ? <Loader /> : <ProductList />}
         </section>
@@ -56,7 +54,7 @@ function HomePage() {
       <LimitPage />
       <Pagination />
       <Footer />
-    </>
+    </section>
   );
 }
 
