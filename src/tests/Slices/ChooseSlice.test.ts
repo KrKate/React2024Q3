@@ -11,19 +11,47 @@ describe('ChooseSliceReducer', () => {
   });
 
   it('check toggleProductReducer', () => {
-    const productID = 7;
-    const action = toggleProduct(productID);
+    const product = {
+      id: 7,
+      title: 'Product',
+      price: 100,
+      description: 'The awesome product!',
+    };
+    const action = toggleProduct(product);
+
     let state = initialState;
     state = chooseSliceReducer(state, action);
-    expect(state.chosenProducts).toEqual([productID]);
+    expect(state.chosenProducts).toEqual([product]);
 
-    const removeAction = toggleProduct(productID);
+    const removeAction = toggleProduct(product);
     state = chooseSliceReducer(state, removeAction);
     expect(state.chosenProducts).toEqual([]);
   });
 
   it('check unselectAllProductsReducer', () => {
-    const state = { ...initialState, chosenProducts: [1, 5, 7] };
+    const state = {
+      ...initialState,
+      chosenProducts: [
+        {
+          id: 1,
+          title: 'Apple',
+          price: 50,
+          description: 'Description 1',
+        },
+        {
+          id: 5,
+          title: 'Orange',
+          price: 70,
+          description: 'Description 5',
+        },
+        {
+          id: 7,
+          title: 'Test',
+          price: 100,
+          description: 'Testing makes me sad',
+        },
+      ],
+    };
     const action = unselectAllProducts();
     const newState = chooseSliceReducer(state, action);
     expect(newState.chosenProducts).toEqual(initialState.chosenProducts);

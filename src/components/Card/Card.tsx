@@ -16,7 +16,9 @@ function Card({ product }: { product: Product }) {
   const chosenProducts = useSelector(
     (state: AppRootState) => state.choose.chosenProducts
   );
-  const isChosen = chosenProducts.includes(product.id);
+  const isChosen = chosenProducts.some(
+    (item: { id: number }) => item.id === product.id
+  );
 
   const toggleDetails = (id: number) => {
     if (selectedId === id) {
