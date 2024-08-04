@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import { Product } from '../../../models';
 import styles from './ProductList.module.css';
@@ -12,7 +11,7 @@ export interface ProductsResponse {
 
 interface ProductListProps {
   products: Product[];
-  currentPage: number;
+  // currentPage: number;
 }
 
 // export const apiSliceProducts = createApi({
@@ -50,7 +49,7 @@ interface ProductListProps {
 //   useFetchPaginationQuery,
 // } = apiSliceProducts;
 
-function ProductList({ products, currentPage }: ProductListProps) {
+function ProductList({ products }: ProductListProps) {
   // const currentPage = useSelector(
   //   (state: AppRootState) => state.pagination.currentPage
   // );
@@ -76,14 +75,14 @@ function ProductList({ products, currentPage }: ProductListProps) {
   return (
     <>
       {products.map((product: Product) => (
-        <Link
-          to={`/page=${currentPage}/details=${product.id}`}
+        <div
+          // to={`/page=${currentPage}/details=${product.id}`}
           data-testid="card"
           key={product.id}
           className={styles.link}
         >
           <Card product={product} />
-        </Link>
+        </div>
       ))}
     </>
   );
