@@ -3,8 +3,8 @@ import { ThemeContext } from './context';
 
 const useTheme = () => {
   const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('Error(((');
+  if (!context) {
+    throw new Error('Error((( Use it width Provider!');
   }
   return context;
 };

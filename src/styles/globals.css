@@ -1,0 +1,23 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  #root {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    background-color: rgb(218, 216, 249);
+  }
+
+  .dark {
+    background-color: black;
+    color: white;
+  }
+
+  .light {
+    background-color: antiquewhite;
+    color: black;
+  }

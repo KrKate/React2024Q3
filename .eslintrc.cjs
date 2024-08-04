@@ -12,7 +12,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs', "setupTests.ts"],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
+    project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
@@ -42,10 +42,10 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     "no-console": "off",
+    'react/jsx-props-no-spreading': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   },
-  ignorePatterns: ["vite.config.ts", "vite.config.d.ts"]
 };
