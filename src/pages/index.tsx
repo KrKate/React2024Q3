@@ -5,6 +5,7 @@ import styles from '../styles/homePage.module.css';
 import ThemeToggleButton from './components/ThemeButton/ThemeButton';
 import { Product } from '../models';
 import { wrapper } from '../redux/store';
+import Search from './components/Search/Search';
 
 export interface ProductsResponse {
   products: Product[];
@@ -25,16 +26,16 @@ export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps(() => async (context) => {
     console.log('getServerSideProps is called');
     const currentPage = Number(context.query.pageNumber) || 1;
-    // const searchValue =context.query.searchValue?.toString() || '';
+    const searchValue = context.query.searchValue?.toString() || '';
     const limit = Number(context.query.limit) || 10;
     const skip = (currentPage - 1) * limit;
-    const url = `${URL.base}${URL.products}?${URL.limit}${limit}&${URL.skip}${skip}`;
+    const url = searchValue
+      ? `${URL.base}${URL.products}/${URL.search}${searchValue}&${URL.limit}${limit}&${URL.skip}${skip}`
+      : `${URL.base}${URL.products}?${URL.limit}${limit}&${URL.skip}${skip}`;
 
-    console.log(`URL ${url}`);
     const res = await fetch(url);
 
     if (!res.ok) {
-      console.log('Error fetch');
       return {
         props: {
           products: [],
@@ -44,7 +45,6 @@ export const getServerSideProps: GetServerSideProps =
     }
 
     const data: ProductsResponse = await res.json();
-    console.log(data);
 
     return {
       props: {
@@ -64,7 +64,9 @@ function HomePage({ products, currentPage }: HomePageProps) {
   return (
     <section className={`${isDarkMode ? 'dark' : 'light'}`}>
       <ThemeToggleButton />
-      <section className={styles.searchContainer}>{/* <Search /> */}</section>
+      <section className={styles.searchContainer}>
+        <Search />
+      </section>
       <main className={styles.mainContainer}>
         <section className={styles.cardsContainer}>
           <ProductList products={products} currentPage={currentPage} />
