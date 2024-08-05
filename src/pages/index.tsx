@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { useSelector } from 'react-redux';
 import useTheme from '../context/contextHook';
 import ProductList from './components/productList/ProductList';
 import styles from '../styles/homePage.module.css';
@@ -6,6 +7,8 @@ import ThemeToggleButton from './components/ThemeButton/ThemeButton';
 import { Product } from '../models';
 import { wrapper } from '../redux/store';
 import Search from './components/Search/Search';
+import Footer from './components/Footer/Footer';
+import { AppRootState } from '../redux/reducers';
 
 export interface ProductsResponse {
   products: Product[];
@@ -61,8 +64,11 @@ interface HomePageProps {
 
 function HomePage({ products, currentPage }: HomePageProps) {
   const { isDarkMode } = useTheme();
+  const chosenProducts = useSelector(
+    (state: AppRootState) => state.choose.chosenProducts
+  );
   return (
-    <section className={`${isDarkMode ? 'dark' : 'light'}`}>
+    <section className={`${isDarkMode ? 'dark' : 'light'} app-container`}>
       <ThemeToggleButton />
       <section className={styles.searchContainer}>
         <Search />
@@ -74,8 +80,8 @@ function HomePage({ products, currentPage }: HomePageProps) {
         {/* <DetailsPage /> */}
       </main>
       {/* <LimitPage />
-       <Pagination />
-      <Footer />  */}
+       <Pagination /> */}
+      {chosenProducts.length > 0 && <Footer />}
     </section>
   );
 }
