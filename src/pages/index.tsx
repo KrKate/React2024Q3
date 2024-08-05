@@ -56,10 +56,10 @@ export const getServerSideProps: GetServerSideProps =
 
 interface HomePageProps {
   products: Product[];
-  // currentPage: number;
+  currentPage: number;
 }
 
-function HomePage({ products }: HomePageProps) {
+function HomePage({ products, currentPage }: HomePageProps) {
   const { isDarkMode } = useTheme();
   return (
     <section className={`${isDarkMode ? 'dark' : 'light'}`}>
@@ -67,7 +67,7 @@ function HomePage({ products }: HomePageProps) {
       <section className={styles.searchContainer}>{/* <Search /> */}</section>
       <main className={styles.mainContainer}>
         <section className={styles.cardsContainer}>
-          <ProductList products={products} />
+          <ProductList products={products} currentPage={currentPage} />
         </section>
         {/* <DetailsPage /> */}
       </main>

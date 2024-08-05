@@ -64,8 +64,8 @@ function Card({ product }: { product: Product }) {
       data-testid="cardTest"
     >
       <Image
-        width={40}
-        height={40}
+        width={140}
+        height={30}
         src={product.images[0]}
         alt={product.title}
         className={styles.images}
