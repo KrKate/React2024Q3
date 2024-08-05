@@ -56,7 +56,7 @@ function Card({ product }: { product: Product }) {
 
   return (
     <div
-      className={styles.characterCard}
+      className={styles.productCard}
       onClick={handleCardClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -64,12 +64,13 @@ function Card({ product }: { product: Product }) {
       data-testid="cardTest"
     >
       <Image
-        width={140}
-        height={30}
+        width={170}
+        height={170}
         src={product.images[0]}
         alt={product.title}
         className={styles.images}
         key={product.id}
+        priority
       />
       <h2>{product.title}</h2>
       <div>{product.price} $</div>

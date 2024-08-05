@@ -12,6 +12,18 @@
     height: fit-content;
 }
 
-.imgDetails {
+/* .imgDetails {
     width: 60%;
+} */
+
+.closeButton {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    width: 30%;
+}
+
+.closeButton:hover {
+  background-color: rgb(148, 133, 211);
 }

@@ -13,7 +13,7 @@
     align-content: center;
     align-content: flex-start;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: 2rem;
     padding: 2rem;
   }
   
@@ -28,5 +28,4 @@
   .mainContainer {
     display: flex;
     flex-direction: row;
-    height: 100%;
   }

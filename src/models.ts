@@ -23,3 +23,11 @@ export interface State {
 export interface SearchProps {
   updateProducts: (products: Product[]) => void;
 }
+
+export const URL = {
+  base: 'https://dummyjson.com',
+  products: '/products',
+  search: 'search?q=',
+  limit: 'limit=',
+  skip: 'skip=',
+};

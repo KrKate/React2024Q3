@@ -1,6 +1,6 @@
-.characterCard {
-  width: 200px;
-  height: 340px;
+.productCard {
+  width: 270px;
+  height: 380px;
   background-color: rgb(178, 178, 180);
   padding: 0.5rem;
   display: flex;
@@ -19,10 +19,10 @@
   background-color: rgb(206, 206, 209);
 }
 
-.images {
+/* .images {
   height: 50%;
   padding: 0;
-}
+} */
 
 .chooseButton {
   cursor: pointer;

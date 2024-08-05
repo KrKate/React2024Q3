@@ -5,15 +5,15 @@
     box-sizing: border-box;
   }
 
-  .dark {
-    background-color: black;
-    color: white;
-  }
+.dark {
+  background-color: rgb(43, 41, 41);
+  color: white;
+}
 
-  .light {
-    background-color: antiquewhite;
-    color: black;
-  }
+.light {
+  background-color: antiquewhite;
+  color: black;
+}
 
 .app-container {
   display: flex;

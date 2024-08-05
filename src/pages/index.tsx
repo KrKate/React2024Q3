@@ -1,15 +1,18 @@
 import { GetServerSideProps } from 'next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import useTheme from '../context/contextHook';
 import ProductList from './components/productList/ProductList';
 import styles from '../styles/homePage.module.css';
 import ThemeToggleButton from './components/ThemeButton/ThemeButton';
-import { Product } from '../models';
+import { URL, Product } from '../models';
 import { wrapper } from '../redux/store';
 import Search from './components/Search/Search';
 import Footer from './components/Footer/Footer';
 import { AppRootState } from '../redux/reducers';
 import Pagination from './components/Pagination/Pagination';
+import { setTotalPages } from '../redux/store/paginationSlice';
+import DetailsPage from './components/details/[id]';
 
 export interface ProductsResponse {
   products: Product[];
@@ -18,17 +21,8 @@ export interface ProductsResponse {
   limit: number;
 }
 
-const URL = {
-  base: 'https://dummyjson.com',
-  products: '/products',
-  search: 'search?q=',
-  limit: 'limit=',
-  skip: 'skip=',
-};
-
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps(() => async (context) => {
-    console.log('getServerSideProps is called');
     const currentPage = Number(context.query.page) || 1;
     const searchValue = context.query.search?.toString() || '';
     const limit = Number(context.query.limit) || 10;
@@ -44,6 +38,8 @@ export const getServerSideProps: GetServerSideProps =
         props: {
           products: [],
           currentPage,
+          total: 0,
+          limit,
         },
       };
     }
@@ -54,6 +50,8 @@ export const getServerSideProps: GetServerSideProps =
       props: {
         products: data.products || [],
         currentPage,
+        total: data.total || 0,
+        limit,
       },
     };
   });
@@ -61,13 +59,28 @@ export const getServerSideProps: GetServerSideProps =
 interface HomePageProps {
   products: Product[];
   currentPage: number;
+  total: number;
 }
 
-function HomePage({ products, currentPage }: HomePageProps) {
+function HomePage({ products, currentPage, total }: HomePageProps) {
   const { isDarkMode } = useTheme();
   const chosenProducts = useSelector(
     (state: AppRootState) => state.choose.chosenProducts
   );
+  const dispatch = useDispatch();
+  const currentLimit = useSelector(
+    (state: AppRootState) => state.homePage.limit
+  );
+  const selectedId = useSelector(
+    (state: AppRootState) => state.homePage.selectedId
+  );
+
+  useEffect(() => {
+    dispatch(setTotalPages(Math.ceil(total / currentLimit)));
+  }, [total, dispatch, currentLimit]);
+
+  const productDetails = products.find((product) => product.id === selectedId);
+
   return (
     <section className={`${isDarkMode ? 'dark' : 'light'} app-container`}>
       <ThemeToggleButton />
@@ -78,9 +91,10 @@ function HomePage({ products, currentPage }: HomePageProps) {
         <section className={styles.cardsContainer}>
           <ProductList products={products} currentPage={currentPage} />
         </section>
-        {/* <DetailsPage /> */}
+        {selectedId && productDetails && (
+          <DetailsPage product={productDetails} />
+        )}
       </main>
-      {/* <LimitPage /> */}
       <Pagination />
       {chosenProducts.length > 0 && <Footer />}
     </section>
