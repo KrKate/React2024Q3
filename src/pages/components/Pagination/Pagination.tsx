@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import styles from './Pagination.module.css';
@@ -20,21 +20,10 @@ function Pagination() {
     (state: AppRootState) => state.pagination.currentPage
   );
   const dispatch = useDispatch();
-  // const {
-  //   data: products,
-  //   isLoading,
-  //   isError,
-  // } = useFetchPaginationQuery({ searchValue, limit, pageNumber: currentPage });
 
   useEffect(() => {
     dispatch(setTotalPages(Math.ceil(allProducts / limit)));
   }, [allProducts, limit, dispatch]);
-
-  // useEffect(() => {
-  //   if (products) {
-  //     dispatch(setProducts(products));
-  //   }
-  // }, [products, dispatch]);
 
   const handlePageChange = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber));
@@ -46,14 +35,13 @@ function Pagination() {
     <div className={styles.pagination}>
       {pages.map((page) => (
         <Link
-          to={`/page=${page}`}
+          href={`/?page=${page}`}
           key={page}
-          className={currentPage === page ? styles.active : ''}
           onClick={() => handlePageChange(page)}
         >
           <button
             type="button"
-            className={currentPage === page ? styles.active : ''}
+            className={`${styles.paginationButton} ${currentPage === page ? styles.active : ''}`}
           >
             {page}
           </button>

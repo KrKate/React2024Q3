@@ -9,6 +9,7 @@ import { wrapper } from '../redux/store';
 import Search from './components/Search/Search';
 import Footer from './components/Footer/Footer';
 import { AppRootState } from '../redux/reducers';
+import Pagination from './components/Pagination/Pagination';
 
 export interface ProductsResponse {
   products: Product[];
@@ -28,8 +29,8 @@ const URL = {
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps(() => async (context) => {
     console.log('getServerSideProps is called');
-    const currentPage = Number(context.query.pageNumber) || 1;
-    const searchValue = context.query.searchValue?.toString() || '';
+    const currentPage = Number(context.query.page) || 1;
+    const searchValue = context.query.search?.toString() || '';
     const limit = Number(context.query.limit) || 10;
     const skip = (currentPage - 1) * limit;
     const url = searchValue
@@ -79,8 +80,8 @@ function HomePage({ products, currentPage }: HomePageProps) {
         </section>
         {/* <DetailsPage /> */}
       </main>
-      {/* <LimitPage />
-       <Pagination /> */}
+      {/* <LimitPage /> */}
+      <Pagination />
       {chosenProducts.length > 0 && <Footer />}
     </section>
   );

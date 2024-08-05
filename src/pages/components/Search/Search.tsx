@@ -19,7 +19,7 @@ function Search() {
     dispatch(setCurrentPage(1));
     router.push({
       pathname: '/',
-      query: { searchValue: inputValue, pageNumber: 1 },
+      query: { search: inputValue, page: 1 },
     });
   };
 
