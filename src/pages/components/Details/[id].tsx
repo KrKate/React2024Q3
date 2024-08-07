@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import Image from 'next/image';
+import router from 'next/router';
 import styles from './DetailsPage.module.css';
-import { Product, URL } from '../../../models';
-import { AppRootState } from '../../../redux/reducers';
+import { Product, URLapp } from '../../../models';
 import {
   setIsDetailsOpen,
   setProduct,
   setSelectedId,
 } from '../../../redux/store/homePageSlice';
+import Loader from '../Loader/Loader';
 
 interface DetailsPageProps {
   product: Product | null;
@@ -17,14 +17,12 @@ interface DetailsPageProps {
 
 export async function getServerSideProps(context: { params: { id: string } }) {
   const { id } = context.params;
-  console.log(id);
-  const response = await fetch(`${URL.base}${URL.products}/${id}`);
+  const response = await fetch(`${URLapp.base}${URLapp.products}/${id}`);
   if (!response.ok) {
     return {
       notFound: true,
     };
   }
-
   const product: Product = await response.json();
   return {
     props: { product },
@@ -32,20 +30,17 @@ export async function getServerSideProps(context: { params: { id: string } }) {
 }
 
 function DetailsPage({ product }: DetailsPageProps) {
-  const currentPage = useSelector(
-    (state: AppRootState) => state.homePage.currentPage
-  );
   const dispatch = useDispatch();
   const detailsRef = useRef<HTMLDivElement>(null);
-
-  const router = useRouter();
 
   const handleClose = useCallback(() => {
     dispatch(setProduct(null));
     dispatch(setIsDetailsOpen(false));
     dispatch(setSelectedId(null));
-    router.push(`/?page=${currentPage}`);
-  }, [currentPage, dispatch, router]);
+    const currentUrl = new URL(window.location.href);
+    const pageParam = currentUrl.searchParams.get('page');
+    router.push(`/?page=${pageParam}`);
+  }, [dispatch]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,27 +51,24 @@ function DetailsPage({ product }: DetailsPageProps) {
         handleClose();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [handleClose]);
 
   if (!product) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (
-    <div className={styles.detailsContainer}>
+    <div className={styles.detailsContainer} ref={detailsRef}>
       <Image
         src={product.images[0]}
         alt={product.title}
         className={styles.imgDetails}
         height={500}
         width={500}
-        priority
       />
       <h2>{product.title}</h2>
       <p>{product.price} $</p>

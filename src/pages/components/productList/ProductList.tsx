@@ -13,9 +13,10 @@ export interface ProductsResponse {
 interface ProductListProps {
   products: Product[];
   currentPage: number;
+  onCardClick: (id: number) => void;
 }
 
-function ProductList({ products, currentPage }: ProductListProps) {
+function ProductList({ products, currentPage, onCardClick }: ProductListProps) {
   if (!Array.isArray(products) || products.length === 0) {
     return <p>Product not found</p>;
   }
@@ -24,10 +25,11 @@ function ProductList({ products, currentPage }: ProductListProps) {
     <>
       {products.map((product: Product) => (
         <Link
-          href={`/?page=${currentPage}/details=${product.id}`}
+          href={`/?page=${currentPage}&details=${product.id}`}
           data-testid="card"
           key={product.id}
           className={styles.link}
+          onClick={() => onCardClick(product.id)}
         >
           <Card product={product} />
         </Link>

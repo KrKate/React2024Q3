@@ -5,7 +5,7 @@ import useTheme from '../context/contextHook';
 import ProductList from './components/productList/ProductList';
 import styles from '../styles/homePage.module.css';
 import ThemeToggleButton from './components/ThemeButton/ThemeButton';
-import { URL, Product } from '../models';
+import { URLapp, Product } from '../models';
 import { wrapper } from '../redux/store';
 import Search from './components/Search/Search';
 import Footer from './components/Footer/Footer';
@@ -13,6 +13,7 @@ import { AppRootState } from '../redux/reducers';
 import Pagination from './components/Pagination/Pagination';
 import { setTotalPages } from '../redux/store/paginationSlice';
 import DetailsPage from './components/details/[id]';
+import { setIsDetailsOpen, setSelectedId } from '../redux/store/homePageSlice';
 
 export interface ProductsResponse {
   products: Product[];
@@ -28,8 +29,8 @@ export const getServerSideProps: GetServerSideProps =
     const limit = Number(context.query.limit) || 10;
     const skip = (currentPage - 1) * limit;
     const url = searchValue
-      ? `${URL.base}${URL.products}/${URL.search}${searchValue}&${URL.limit}${limit}&${URL.skip}${skip}`
-      : `${URL.base}${URL.products}?${URL.limit}${limit}&${URL.skip}${skip}`;
+      ? `${URLapp.base}${URLapp.products}/${URLapp.search}${searchValue}&${URLapp.limit}${limit}&${URLapp.skip}${skip}`
+      : `${URLapp.base}${URLapp.products}?${URLapp.limit}${limit}&${URLapp.skip}${skip}`;
 
     const res = await fetch(url);
 
@@ -81,6 +82,11 @@ function HomePage({ products, currentPage, total }: HomePageProps) {
 
   const productDetails = products.find((product) => product.id === selectedId);
 
+  const handleCardClick = (id: number) => {
+    dispatch(setSelectedId(id));
+    dispatch(setIsDetailsOpen(true));
+  };
+
   return (
     <section className={`${isDarkMode ? 'dark' : 'light'} app-container`}>
       <ThemeToggleButton />
@@ -89,7 +95,11 @@ function HomePage({ products, currentPage, total }: HomePageProps) {
       </section>
       <main className={styles.mainContainer}>
         <section className={styles.cardsContainer}>
-          <ProductList products={products} currentPage={currentPage} />
+          <ProductList
+            products={products}
+            currentPage={currentPage}
+            onCardClick={handleCardClick}
+          />
         </section>
         {selectedId && productDetails && (
           <DetailsPage product={productDetails} />

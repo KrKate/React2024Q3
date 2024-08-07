@@ -4,14 +4,16 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from '../context/context';
 import { wrapper } from '../redux/store';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, ...rest }: AppProps) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+
   return (
-    <Provider store={wrapper.useWrappedStore(pageProps).store}>
+    <Provider store={store}>
       <ThemeProvider>
-        <Component {...pageProps} />
+        <Component {...props.pageProps} />
       </ThemeProvider>
     </Provider>
   );
 }
 
-export default wrapper.withRedux(App);
+export default App;

@@ -12,7 +12,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.ts'],
     coverage: {
-      exclude: ['public'],
+      include: ['src/**/*'],
     },
   },
 });

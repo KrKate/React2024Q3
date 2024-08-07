@@ -24,7 +24,7 @@ export interface SearchProps {
   updateProducts: (products: Product[]) => void;
 }
 
-export const URL = {
+export const URLapp = {
   base: 'https://dummyjson.com',
   products: '/products',
   search: 'search?q=',

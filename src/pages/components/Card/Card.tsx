@@ -44,6 +44,7 @@ function Card({ product }: { product: Product }) {
   const toggleChoose = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
+    console.log(product.images[0]);
     dispatch(
       toggleProduct({
         id: product.id,
@@ -70,7 +71,6 @@ function Card({ product }: { product: Product }) {
         alt={product.title}
         className={styles.images}
         key={product.id}
-        priority
       />
       <h2>{product.title}</h2>
       <div>{product.price} $</div>
