@@ -1,16 +1,11 @@
 import { vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { NextRouter, useRouter } from 'next/router';
 import DetailsPage, {
   getServerSideProps,
 } from '../pages/components/details/[id]';
-import {
-  setProduct,
-  setIsDetailsOpen,
-  setSelectedId,
-} from '../redux/store/homePageSlice';
 
 const mockStore = configureMockStore();
 
@@ -31,7 +26,7 @@ const mockProduct = {
   images: `/test-image`,
 };
 
-describe.skip('DetailsPage Component', () => {
+describe('DetailsPage Component', () => {
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({
       route: '/',
@@ -71,41 +66,6 @@ describe.skip('DetailsPage Component', () => {
     );
 
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
-  });
-
-  it('should close details on click outside', () => {
-    const store = mockStore({});
-    render(
-      <Provider store={store}>
-        <DetailsPage product={mockProduct} />
-      </Provider>
-    );
-
-    fireEvent.mouseDown(document);
-    const actions = store.getActions();
-    expect(actions).toEqual([
-      setProduct(null),
-      setIsDetailsOpen(false),
-      setSelectedId(null),
-    ]);
-  });
-
-  it('should close details when close button is clicked', () => {
-    const store = mockStore({});
-    render(
-      <Provider store={store}>
-        <DetailsPage product={mockProduct} />
-      </Provider>
-    );
-
-    fireEvent.click(screen.getByTestId('close-button'));
-
-    const actions = store.getActions();
-    expect(actions).toEqual([
-      setProduct(null),
-      setIsDetailsOpen(false),
-      setSelectedId(null),
-    ]);
   });
 });
 

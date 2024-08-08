@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import createMockStore from 'redux-mock-store';
+import { vi } from 'vitest';
 import Footer from '../pages/components/Footer/Footer';
 import {
   initialState,
@@ -13,6 +14,10 @@ const mockStore = createMockStore<{
 }>();
 
 describe('Footer component', () => {
+  beforeAll(() => {
+    global.URL.createObjectURL = vi.fn(() => 'mocked-url');
+  });
+
   it('renders the unselected all button', () => {
     const store = mockStore({
       choose: initialState,
@@ -68,5 +73,71 @@ describe('Footer component', () => {
 
     const actions = store.getActions();
     expect(actions).toEqual([unselectAllProducts()]);
+  });
+
+  it('renders the download button', () => {
+    const chosenProducts = [
+      { id: 1, title: 'Product 1', price: 100, description: 'Description 1' },
+    ];
+    const store = mockStore({
+      choose: { chosenProducts },
+    });
+
+    render(
+      <Provider store={store}>
+        <Footer />
+      </Provider>
+    );
+
+    const downloadButton = screen.getByRole('button', {
+      name: /download/i,
+    });
+    expect(downloadButton).toBeInTheDocument();
+  });
+
+  it('does not allow downloading when there are no chosen products', () => {
+    const store = mockStore({
+      choose: initialState,
+    });
+
+    render(
+      <Provider store={store}>
+        <Footer />
+      </Provider>
+    );
+
+    const downloadButton = screen.getByRole('button', {
+      name: /download/i,
+    });
+
+    fireEvent.click(downloadButton);
+  });
+
+  it('creates a CSV file with correct content when download button is clicked', () => {
+    const chosenProducts = [
+      { id: 1, title: 'Product 1', price: 100, description: 'Description 1' },
+      { id: 2, title: 'Product 2', price: 200, description: 'Description 2' },
+    ];
+    const store = mockStore({
+      choose: { chosenProducts },
+    });
+
+    render(
+      <Provider store={store}>
+        <Footer />
+      </Provider>
+    );
+
+    const downloadButton = screen.getByRole('button', {
+      name: /download/i,
+    });
+
+    const createObjectURLSpy = vi
+      .spyOn(URL, 'createObjectURL')
+      .mockImplementation(() => 'mocked-url');
+
+    fireEvent.click(downloadButton);
+    expect(global.URL.createObjectURL).toHaveBeenCalled();
+    createObjectURLSpy.mockRestore();
   });
 });

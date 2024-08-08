@@ -9,12 +9,11 @@ import { Product } from '../models';
 const mockStore = configureMockStore();
 const store = mockStore({
   homePage: {
-    selectedId: null, // или любое другое значение по умолчанию
+    selectedId: null,
   },
   choose: {
-    chosenProducts: [], // Инициализация chosenProducts как пустого массива
+    chosenProducts: [],
   },
-  // Добавьте другие необходимые состояния, если они есть
 });
 
 beforeAll(() => server.listen());
