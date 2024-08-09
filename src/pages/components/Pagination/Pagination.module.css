@@ -1,6 +1,6 @@
 .paginationButton {
-    padding: 5px;
-    font-size: 20px;
+    padding: 4px;
+    font-size: 18px;
 } 
 
 .active {
@@ -8,7 +8,7 @@
 }
 
 .pagination {
-    margin: 1rem;
+    margin: 0.6rem;
     display: flex;
     gap: 0.4rem;
     justify-content: center;
