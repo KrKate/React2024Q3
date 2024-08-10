@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { vi } from 'vitest';
 import { useRouter } from 'next/router';
-import Search from '../pages/components/Search/Search';
+import Search from '../components/Search/Search';
 import { setSearchValue } from '../redux/store/searchSlice';
 import { setCurrentPage } from '../redux/store/paginationSlice';
 

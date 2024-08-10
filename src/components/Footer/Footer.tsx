@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Footer.module.css';
-import { AppRootState } from '../../../redux/reducers';
-import { unselectAllProducts } from '../../../redux/store/chooseSlice';
-import { Product } from '../../../models';
+import { AppRootState } from '../../redux/reducers';
+import { unselectAllProducts } from '../../redux/store/chooseSlice';
+import { Product } from '../../models';
 
 function Footer() {
   const dispatch = useDispatch();

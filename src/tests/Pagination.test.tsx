@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 import server from '../../mock/server';
-import Pagination from '../pages/components/Pagination/Pagination';
+import Pagination from '../components/Pagination/Pagination';
 
 const mockStore = configureMockStore();
 const store = mockStore({

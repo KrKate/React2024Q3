@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import styles from './Card.module.css';
-import { Product } from '../../../models';
-import { AppRootState } from '../../../redux/reducers';
+import { Product } from '../../models';
+import { AppRootState } from '../../redux/reducers';
 import {
   setIsDetailsOpen,
   setSelectedId,
-} from '../../../redux/store/homePageSlice';
-import { toggleProduct } from '../../../redux/store/chooseSlice';
+} from '../../redux/store/homePageSlice';
+import { toggleProduct } from '../../redux/store/chooseSlice';
 
 function Card({ product }: { product: Product }) {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Card from '../Card/Card';
-import { Product } from '../../../models';
+import { Product } from '../../models';
 import styles from './ProductList.module.css';
 
 export interface ProductsResponse {

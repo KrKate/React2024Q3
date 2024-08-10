@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { http, HttpResponse } from 'msw';
 import configureMockStore from 'redux-mock-store';
-import ProductList from '../pages/components/productList/ProductList';
+import ProductList from '../components/productList/ProductList';
 import server from '../../mock/server';
 import { Product } from '../models';
 

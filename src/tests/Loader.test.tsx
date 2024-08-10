@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Loader from '../pages/components/Loader/Loader';
+import Loader from '../components/Loader/Loader';
 import '@testing-library/jest-dom';
 
 describe('Loader component', () => {

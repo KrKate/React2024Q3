@@ -1,4 +1,4 @@
-import useTheme from '../../../context/contextHook';
+import useTheme from '../../context/contextHook';
 import styles from './ThemeButton.module.css';
 
 function ThemeToggleButton() {

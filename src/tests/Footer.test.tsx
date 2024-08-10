@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import createMockStore from 'redux-mock-store';
 import { vi } from 'vitest';
-import Footer from '../pages/components/Footer/Footer';
+import Footer from '../components/Footer/Footer';
 import {
   initialState,
   ProductInfo,

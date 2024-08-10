@@ -2,17 +2,17 @@ import { GetServerSideProps } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import useTheme from '../context/contextHook';
-import ProductList from './components/productList/ProductList';
+import ProductList from '../components/productList/ProductList';
 import styles from '../styles/homePage.module.css';
-import ThemeToggleButton from './components/ThemeButton/ThemeButton';
+import ThemeToggleButton from '../components/ThemeButton/ThemeButton';
 import { URLapp, Product } from '../models';
 import { wrapper } from '../redux/store';
-import Search from './components/Search/Search';
-import Footer from './components/Footer/Footer';
+import Search from '../components/Search/Search';
+import Footer from '../components/Footer/Footer';
 import { AppRootState } from '../redux/reducers';
-import Pagination from './components/Pagination/Pagination';
+import Pagination from '../components/Pagination/Pagination';
 import { setTotalPages } from '../redux/store/paginationSlice';
-import DetailsPage from './components/details/[id]';
+import DetailsPage from '../components/details/[id]';
 import { setIsDetailsOpen, setSelectedId } from '../redux/store/homePageSlice';
 
 export interface ProductsResponse {

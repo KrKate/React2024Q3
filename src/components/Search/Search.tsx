@@ -2,8 +2,8 @@ import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import styles from './Search.module.css';
-import { setSearchValue } from '../../../redux/store/searchSlice';
-import { setCurrentPage } from '../../../redux/store/paginationSlice';
+import { setSearchValue } from '../../redux/store/searchSlice';
+import { setCurrentPage } from '../../redux/store/paginationSlice';
 
 function Search() {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import ThemeButton from '../pages/components/ThemeButton/ThemeButton';
+import ThemeButton from '../components/ThemeButton/ThemeButton';
 import { ThemeProvider, ThemeContext } from '../context/context';
 
 describe('ThemeToggleButton', () => {

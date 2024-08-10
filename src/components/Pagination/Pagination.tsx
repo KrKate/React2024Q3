@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import styles from './Pagination.module.css';
-import { AppRootState } from '../../../redux/reducers';
+import { AppRootState } from '../../redux/reducers';
 import {
   setCurrentPage,
   setTotalPages,
-} from '../../../redux/store/paginationSlice';
+} from '../../redux/store/paginationSlice';
 
 function Pagination() {
   const allProducts = useSelector(

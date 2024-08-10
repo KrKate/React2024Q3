@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore, Store } from '@reduxjs/toolkit';
-import Card from '../pages/components/Card/Card';
+import Card from '../components/Card/Card';
 import { Product } from '../models';
 import { rootReducer } from '../redux/reducers';
 import { setIsDetailsOpen, setSelectedId } from '../redux/store/homePageSlice';

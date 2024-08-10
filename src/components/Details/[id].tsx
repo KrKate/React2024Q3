@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import router from 'next/router';
 import styles from './DetailsPage.module.css';
-import { Product, URLapp } from '../../../models';
+import { Product, URLapp } from '../../models';
 import {
   setIsDetailsOpen,
   setProduct,
   setSelectedId,
-} from '../../../redux/store/homePageSlice';
+} from '../../redux/store/homePageSlice';
 import Loader from '../Loader/Loader';
 
 interface DetailsPageProps {
