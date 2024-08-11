@@ -67,3 +67,11 @@
 }.__className_e1cf46 {font-family: '__Inter_e1cf46', '__Inter_Fallback_e1cf46';font-weight: 400;font-style: normal
 }
 
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Loader/Loader.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.Loader_loader__gANhr {
+    color: white;
+    display: block;
+    width: 100%;
+  }

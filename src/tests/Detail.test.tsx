@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { NextRouter, useRouter } from 'next/router';
-import DetailsPage, { getServerSideProps } from '../components/details/[id]';
+import DetailsPage, { getServerSideProps } from '../components/Details/Details';
 
 const mockStore = configureMockStore();
 

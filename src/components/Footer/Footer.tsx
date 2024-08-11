@@ -1,3 +1,5 @@
+'use client';
+
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Footer.module.css';
 import { AppRootState } from '../../redux/reducers';

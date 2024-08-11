@@ -1,6 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+'use client';
+
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './Search.module.css';
 import { setSearchValue } from '../../redux/store/searchSlice';
 import { setCurrentPage } from '../../redux/store/paginationSlice';
@@ -9,18 +11,21 @@ function Search() {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search') || '';
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
+  useEffect(() => {
+    setInputValue(search);
+  }, [search]);
+
   const handleSearchClick = () => {
     dispatch(setSearchValue(inputValue));
     dispatch(setCurrentPage(1));
-    router.push({
-      pathname: '/',
-      query: { search: inputValue, page: 1 },
-    });
+    router.push(`/?search=${inputValue}&page=1`);
   };
 
   return (

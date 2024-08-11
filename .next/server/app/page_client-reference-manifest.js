@@ -10,6 +10,14 @@ globalThis.__RSC_MANIFEST['/page'] = {
         async: false,
       },
     },
+    '(app-pages-browser)/./src/components/Loader/Loader.module.css': {
+      '*': {
+        id: '(ssr)/./src/components/Loader/Loader.module.css',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
     '(app-pages-browser)/./src/context/context.tsx': {
       '*': {
         id: '(ssr)/./src/context/context.tsx',
@@ -96,6 +104,12 @@ globalThis.__RSC_MANIFEST['/page'] = {
         chunks: ['app/layout', 'static/chunks/app/layout.js'],
         async: false,
       },
+    'D:\\RSS\\React2024Q3\\src\\components\\Loader\\Loader.module.css': {
+      id: '(app-pages-browser)/./src/components/Loader/Loader.module.css',
+      name: '*',
+      chunks: ['app/layout', 'static/chunks/app/layout.js'],
+      async: false,
+    },
     'D:\\RSS\\React2024Q3\\src\\context\\context.tsx': {
       id: '(app-pages-browser)/./src/context/context.tsx',
       name: '*',
