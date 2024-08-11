@@ -1,0 +1,38 @@
+.productCard {
+  width: 240px;
+  height: 360px;
+  background-color: rgb(178, 178, 180);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: none;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.5 linear;
+}
+
+.characterCard:hover {
+  background-color: rgb(206, 206, 209);
+}
+
+.chooseButton {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 20px;
+  transition: all 0.3s linear;
+  margin-top: auto;
+  width: 70%;
+  font-size: 18px;
+}
+
+.chooseButton:hover {
+  background-color: #82ee3f;
+}
+
+.chosen {
+  background-color: #89e94d;
+}

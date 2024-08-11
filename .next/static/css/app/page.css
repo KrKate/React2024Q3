@@ -1,0 +1,242 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Card/Card.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+.Card_productCard__rgsBe {
+  width: 240px;
+  height: 360px;
+  background-color: rgb(178, 178, 180);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: none;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.5 linear;
+}
+
+.Card_characterCard__x9_m4:hover {
+  background-color: rgb(206, 206, 209);
+}
+
+.Card_chooseButton__H0RNx {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 20px;
+  transition: all 0.3s linear;
+  margin-top: auto;
+  width: 70%;
+  font-size: 18px;
+}
+
+.Card_chooseButton__H0RNx:hover {
+  background-color: #82ee3f;
+}
+
+.Card_chosen__TcSZJ {
+  background-color: #89e94d;
+}
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/productList/ProductList.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+.ProductList_link__zQ7DO {
+    text-decoration: none;
+    color:black;
+}
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Search/Search.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.Search_searchComponent__dcdcG {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 20px;
+  }
+
+.Search_searchInput__nVEMb {
+    min-height: 2rem;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+}  
+
+.Search_searchButton__vAdr_ {
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.Search_searchButton__vAdr_:hover {
+    background-color:rgb(235, 74, 208);
+    transition: all 0.5s ease;
+}
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/ThemeButton/ThemeButton.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+.ThemeButton_themeButton__Is6Ay {
+    position: absolute;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ThemeButton_lightButton__yW7HU {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+
+.ThemeButton_darkButton__7_ULa {
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
+
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Footer/Footer.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.Footer_footer__4vzqH {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgb(58, 5, 144);
+    padding: 1rem;
+    color: white;
+    font-size: 20px;
+    margin-top: auto;
+}
+
+.Footer_footerButton__8w4_Y {
+    width: 8rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 20px;
+    transition: all 0.3s linear;
+    margin-top: auto;
+    font-size: 16px;
+    font-weight: 600;
+}
+  
+.Footer_footerButton__8w4_Y:hover {
+    background-color: #82ee3f;
+  }
+  
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Pagination/Pagination.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+.Pagination_paginationButton___9scK {
+    padding: 4px;
+    font-size: 18px;
+} 
+
+.Pagination_active__xC1TQ {
+    border-color: blue;
+}
+
+.Pagination_pagination__c7olK {
+    margin: 0.6rem;
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/app/home/home.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+.home_dark__6lD0C {
+  background-color: rgb(43, 41, 41);
+  color: white;
+}
+
+.home_light__NBpK6 {
+  background-color: antiquewhite;
+  color: black;
+}
+
+.home_appContainer__v0O1l {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.home_searchContainer__3j0NO {
+    background-color: rgb(58, 5, 144);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+.home_cardsContainer__S8OEF {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    gap: 2rem;
+    padding: 2rem;
+}
+  
+  .home_errorContainer__3_ppe {
+    background-color: rgb(0, 0, 12);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .home_mainContainer___89hX {
+    display: flex;
+    flex-direction: row;
+  }
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Details/DetailsPage.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+.DetailsPage_detailsContainer__d2TXv {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    padding: 1rem;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 1.4rem;
+    border: 0.4rem solid rgb(23, 8, 90);
+    border-radius: 10px;
+    margin: 1rem;
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+.DetailsPage_closeButton__AGG_T {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    width: 30%;
+    font-size: 20px;
+}
+
+.DetailsPage_closeButton__AGG_T:hover {
+  background-color: rgb(148, 133, 211);
+}
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/Loader/Loader.module.css ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+.Loader_loader__gANhr {
+    color: white;
+    display: block;
+    width: 100%;
+  }

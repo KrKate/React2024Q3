@@ -1,0 +1,21 @@
+.themeButton {
+    position: absolute;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.lightButton {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+
+.darkButton {
+    background-color: #333333;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+  }
