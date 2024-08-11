@@ -10,6 +10,14 @@ globalThis.__RSC_MANIFEST['/page'] = {
         async: false,
       },
     },
+    '(app-pages-browser)/./src/context/context.tsx': {
+      '*': {
+        id: '(ssr)/./src/context/context.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
     '(app-pages-browser)/./src/redux/store/reduxProvider.tsx': {
       '*': {
         id: '(ssr)/./src/redux/store/reduxProvider.tsx',
@@ -88,6 +96,12 @@ globalThis.__RSC_MANIFEST['/page'] = {
         chunks: ['app/layout', 'static/chunks/app/layout.js'],
         async: false,
       },
+    'D:\\RSS\\React2024Q3\\src\\context\\context.tsx': {
+      id: '(app-pages-browser)/./src/context/context.tsx',
+      name: '*',
+      chunks: ['app/layout', 'static/chunks/app/layout.js'],
+      async: false,
+    },
     'D:\\RSS\\React2024Q3\\src\\redux\\store\\reduxProvider.tsx': {
       id: '(app-pages-browser)/./src/redux/store/reduxProvider.tsx',
       name: '*',

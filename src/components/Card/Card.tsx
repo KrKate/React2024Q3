@@ -1,3 +1,5 @@
+'use client';
+
 import { useDispatch, useSelector } from 'react-redux';
 import Image from 'next/image';
 import styles from './Card.module.css';

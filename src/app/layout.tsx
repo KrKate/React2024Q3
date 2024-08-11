@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
-// import { ThemeProvider } from '../context/context';
 import ReduxProvider from '../redux/store/reduxProvider';
+import { ThemeProvider } from '../context/context';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400'] });
 
@@ -17,9 +17,11 @@ function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="icon" href="/assets/favicon.png" />
       </head>
-      <body className={inter.className}>
-        <ReduxProvider>{children}</ReduxProvider>
-      </body>
+      <ThemeProvider>
+        <body className={inter.className}>
+          <ReduxProvider>{children}</ReduxProvider>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

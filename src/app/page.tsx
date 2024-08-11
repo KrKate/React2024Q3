@@ -13,7 +13,7 @@ async function Page({
   const limit = Number(searchParams.limit) || 10;
 
   let products: Product[] = [];
-  let total = 0;
+  //   let total = 0;
 
   try {
     const data: ProductsResponse = await fetchProducts(
@@ -22,12 +22,12 @@ async function Page({
       limit
     );
     products = data.products || [];
-    total = data.total || 0;
+    // total = data.total || 0;
   } catch (error) {
     console.error(error);
   }
 
-  return <Home products={products} total={total} currentPage={currentPage} />;
+  return <Home products={products} currentPage={currentPage} />;
 }
 
 export default Page;

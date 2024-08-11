@@ -1,3 +1,5 @@
+'use client';
+
 import useTheme from '../../context/contextHook';
 import styles from './ThemeButton.module.css';
 
