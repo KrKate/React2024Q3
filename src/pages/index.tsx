@@ -12,7 +12,7 @@ import Footer from './components/Footer/Footer';
 import { AppRootState } from '../redux/reducers';
 import Pagination from './components/Pagination/Pagination';
 import { setTotalPages } from '../redux/store/paginationSlice';
-import DetailsPage from './components/details/[id]';
+import DetailsPage from './components/Details/Details';
 import { setIsDetailsOpen, setSelectedId } from '../redux/store/homePageSlice';
 
 export interface ProductsResponse {

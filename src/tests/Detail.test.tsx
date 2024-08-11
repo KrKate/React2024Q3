@@ -5,7 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import { NextRouter, useRouter } from 'next/router';
 import DetailsPage, {
   getServerSideProps,
-} from '../pages/components/details/[id]';
+} from '../pages/components/Details/Details';
 
 const mockStore = configureMockStore();
 
@@ -42,7 +42,11 @@ describe('DetailsPage Component', () => {
   });
 
   it('should render product details', () => {
-    const store = mockStore({});
+    const store = mockStore({
+      pagination: {
+        currentPage: 1,
+      },
+    });
     render(
       <Provider store={store}>
         <DetailsPage product={mockProduct} />
@@ -58,7 +62,11 @@ describe('DetailsPage Component', () => {
   });
 
   it('should show loader when product is null', () => {
-    const store = mockStore({});
+    const store = mockStore({
+      pagination: {
+        currentPage: 1,
+      },
+    });
     render(
       <Provider store={store}>
         <DetailsPage product={null} />
