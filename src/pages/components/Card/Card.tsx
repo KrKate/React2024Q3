@@ -44,7 +44,6 @@ function Card({ product }: { product: Product }) {
   const toggleChoose = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     event.preventDefault();
-    console.log(product.images[0]);
     dispatch(
       toggleProduct({
         id: product.id,
