@@ -19,11 +19,6 @@
   background-color: rgb(206, 206, 209);
 }
 
-.images {
-  height: 50%;
-  padding: 0;
-}
-
 .chooseButton {
   cursor: pointer;
   padding: 5px;

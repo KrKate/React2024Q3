@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { Suspense, useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,16 +14,8 @@ import {
 import Loader from '../Loader/Loader';
 
 interface DetailsPageProps {
-  product: Product;
+  product: Product | null;
 }
-
-// async function fetchProduct(id: string): Promise<Product | null> {
-//   const response = await fetch(`${URLapp.base}${URLapp.products}/${id}`);
-//   if (!response.ok) {
-//     return null;
-//   }
-//   return response.json();
-// }
 
 function DetailsPage({ product }: DetailsPageProps) {
   const dispatch = useDispatch();
@@ -39,14 +31,17 @@ function DetailsPage({ product }: DetailsPageProps) {
     router.push(`/?page=${pageParam}`);
   }, [dispatch, router]);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      detailsRef.current &&
-      !detailsRef.current.contains(event.target as Node)
-    ) {
-      handleClose();
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (
+        detailsRef.current &&
+        !detailsRef.current.contains(event.target as Node)
+      ) {
+        handleClose();
+      }
+    },
+    [handleClose]
+  );
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -60,26 +55,28 @@ function DetailsPage({ product }: DetailsPageProps) {
   }
 
   return (
-    <div className={styles.detailsContainer} ref={detailsRef}>
-      <Image
-        src={product.images[0]}
-        alt={product.title}
-        className={styles.imgDetails}
-        height={500}
-        width={500}
-      />
-      <h2>{product.title}</h2>
-      <p>{product.price} $</p>
-      <p> {product.description}</p>
-      <button
-        type="button"
-        className={styles.closeButton}
-        onClick={handleClose}
-        data-testid="close-button"
-      >
-        Close
-      </button>
-    </div>
+    <Suspense fallback={<Loader />}>
+      <div className={styles.detailsContainer} ref={detailsRef}>
+        <Image
+          src={product.images[0]}
+          alt={product.title}
+          className={styles.imgDetails}
+          height={500}
+          width={500}
+        />
+        <h2>{product.title}</h2>
+        <p>{product.price} $</p>
+        <p> {product.description}</p>
+        <button
+          type="button"
+          className={styles.closeButton}
+          onClick={handleClose}
+          data-testid="close-button"
+        >
+          Close
+        </button>
+      </div>
+    </Suspense>
   );
 }
 

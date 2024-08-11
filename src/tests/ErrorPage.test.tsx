@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import ErrorPage from '../pages/404';
+import ErrorPage from '../app/not-found';
 
 describe('ErrorPage component', () => {
   it('renders the loading text', () => {

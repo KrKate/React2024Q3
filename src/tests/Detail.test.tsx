@@ -2,19 +2,14 @@ import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import { NextRouter, useRouter } from 'next/router';
-import DetailsPage, { getServerSideProps } from '../components/Details/Details';
+import { useRouter } from 'next/navigation';
+import DetailsPage from '../components/Details/Details';
 
 const mockStore = configureMockStore();
 
-vi.mock('next/router', async (importOriginal) => {
-  const actual: NextRouter = await importOriginal();
-  return {
-    ...actual,
-    push: vi.fn(),
-    useRouter: vi.fn(),
-  };
-});
+vi.mock('next/navigation', () => ({
+  useRouter: vi.fn(),
+}));
 
 const mockProduct = {
   id: 1,
@@ -27,10 +22,6 @@ const mockProduct = {
 describe('DetailsPage Component', () => {
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '/',
       push: vi.fn(),
     });
   });
@@ -64,29 +55,5 @@ describe('DetailsPage Component', () => {
     );
 
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
-  });
-});
-
-describe('getServerSideProps', () => {
-  it('should fetch product data successfully', async () => {
-    global.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: vi.fn().mockResolvedValue(mockProduct),
-    });
-
-    const context = { params: { id: '1' } };
-    const result = await getServerSideProps(context);
-
-    expect(result).toEqual({
-      props: { product: mockProduct },
-    });
-  });
-
-  it('should return notFound when fetch fails', async () => {
-    global.fetch = vi.fn().mockResolvedValue({ ok: false });
-    const context = { params: { id: '1' } };
-    const result = await getServerSideProps(context);
-
-    expect(result).toEqual({ notFound: true });
   });
 });

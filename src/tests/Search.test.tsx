@@ -2,13 +2,14 @@ import { render, fireEvent } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { vi } from 'vitest';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Search from '../components/Search/Search';
 import { setSearchValue } from '../redux/store/searchSlice';
 import { setCurrentPage } from '../redux/store/paginationSlice';
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: vi.fn(),
+  useSearchParams: vi.fn(),
 }));
 
 describe('Search', () => {
@@ -26,11 +27,10 @@ describe('Search', () => {
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '/',
       push: vi.fn(),
+    });
+    (useSearchParams as jest.Mock).mockReturnValue({
+      get: vi.fn().mockReturnValue(''),
     });
   });
 

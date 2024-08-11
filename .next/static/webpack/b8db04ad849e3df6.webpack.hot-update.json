@@ -1,0 +1,7 @@
+{
+  "c": ["app/page", "webpack"],
+  "r": [],
+  "m": [
+    "(app-pages-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Capp%5C%5Chome%5C%5Chome.module.css%22%2C%22ids%22%3A%5B%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccomponents%5C%5CDetails%5C%5CDetails.tsx%22%2C%22ids%22%3A%5B%22default%22%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccomponents%5C%5CFooter%5C%5CFooter.tsx%22%2C%22ids%22%3A%5B%22default%22%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccomponents%5C%5CPagination%5C%5CPagination.tsx%22%2C%22ids%22%3A%5B%22default%22%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccomponents%5C%5CproductList%5C%5CProductList.tsx%22%2C%22ids%22%3A%5B%22default%22%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccomponents%5C%5CSearch%5C%5CSearch.tsx%22%2C%22ids%22%3A%5B%22default%22%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccomponents%5C%5CThemeButton%5C%5CThemeButton.tsx%22%2C%22ids%22%3A%5B%22default%22%5D%7D&modules=%7B%22request%22%3A%22D%3A%5C%5CRSS%5C%5CReact2024Q3%5C%5Csrc%5C%5Ccontext%5C%5CcontextHook.ts%22%2C%22ids%22%3A%5B%22default%22%5D%7D&server=false!"
+  ]
+}

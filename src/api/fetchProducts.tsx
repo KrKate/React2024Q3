@@ -3,6 +3,7 @@ import { Product, URLapp } from '../models';
 export interface ProductsResponse {
   products: Product[];
   total: number;
+  currentPage: number;
 }
 
 export async function fetchProducts(

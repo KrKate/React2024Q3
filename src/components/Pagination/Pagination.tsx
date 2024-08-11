@@ -1,35 +1,11 @@
+'use client';
+
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import styles from './Pagination.module.css';
-import { AppRootState } from '../../redux/reducers';
-import {
-  setCurrentPage,
-  setTotalPages,
-} from '../../redux/store/paginationSlice';
+import usePaginationClient from '../../hooks/usePaginationClient';
 
 function Pagination() {
-  const allProducts = useSelector(
-    (state: AppRootState) => state.homePage.total
-  );
-  const limit = useSelector((state: AppRootState) => state.homePage.limit);
-  const totalPages = useSelector(
-    (state: AppRootState) => state.pagination.totalPages
-  );
-  const currentPage = useSelector(
-    (state: AppRootState) => state.pagination.currentPage
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setTotalPages(Math.ceil(allProducts / limit)));
-  }, [allProducts, limit, dispatch]);
-
-  const handlePageChange = (pageNumber: number) => {
-    dispatch(setCurrentPage(pageNumber));
-  };
-
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const { pages, currentPage, handlePageChange } = usePaginationClient();
 
   return (
     <div className={styles.pagination}>

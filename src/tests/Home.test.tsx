@@ -2,15 +2,16 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore, Store } from '@reduxjs/toolkit/react';
 import { vi } from 'vitest';
-import { useRouter } from 'next/router';
-import HomePage from '../pages';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Home from '../app/home/page';
 import { rootReducer } from '../redux/reducers';
 import { RootState } from '../redux/store';
 import { Product } from '../models';
 import { ThemeProvider } from '../context/context';
 
-vi.mock('next/router', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: vi.fn(),
+  useSearchParams: vi.fn(),
 }));
 
 interface RenderWithReduxOptions {
@@ -58,11 +59,10 @@ const products: Product[] = [
 describe('HomePage Component', () => {
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '/',
       push: vi.fn(),
+    });
+    (useSearchParams as jest.Mock).mockReturnValue({
+      get: vi.fn().mockReturnValue(''),
     });
   });
 
@@ -83,7 +83,7 @@ describe('HomePage Component', () => {
 
   it('renders correctly with products', () => {
     const { getByText } = renderWithReduxAndTheme(
-      <HomePage products={products} currentPage={1} total={20} />,
+      <Home products={products} currentPage={1} />,
       {
         initialState,
       }

@@ -18,13 +18,13 @@ function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="icon" href="/assets/favicon.png" />
       </head>
-      <ThemeProvider>
-        <Suspense fallback={<Loader />}>
-          <body className={inter.className}>
+      <body className={inter.className}>
+        <ThemeProvider>
+          <Suspense fallback={<Loader />}>
             <ReduxProvider>{children}</ReduxProvider>
-          </body>
-        </Suspense>
-      </ThemeProvider>
+          </Suspense>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
