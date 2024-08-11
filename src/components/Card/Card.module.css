@@ -1,6 +1,6 @@
 .productCard {
-  width: 220px;
-  height: 300px;
+  width: 240px;
+  height: 350px;
   background-color: rgb(178, 178, 180);
   padding: 0.5rem;
   display: flex;
@@ -31,6 +31,7 @@
   transition: all 0.3s linear;
   margin-top: auto;
   width: 70%;
+  font-size: 18px;
 }
 
 .chooseButton:hover {

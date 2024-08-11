@@ -16,6 +16,8 @@ import {
 // import Footer from '../../components/Footer/Footer';
 // import Pagination from '../../components/Pagination/Pagination';
 // import { AppRootState } from '../../redux/reducers';
+import styles from './home.module.css';
+import useTheme from '../../context/contextHook';
 
 interface HomePageProps {
   products: Product[];
@@ -24,6 +26,7 @@ interface HomePageProps {
 }
 
 function Home({ products, currentPage }: HomePageProps) {
+  const { isDarkMode } = useTheme();
   const dispatch = useDispatch();
   //   const chosenProducts = useSelector(
   //     (state: AppRootState) => state.choose.chosenProducts
@@ -47,15 +50,20 @@ function Home({ products, currentPage }: HomePageProps) {
   };
 
   return (
-    <section className="app-container">
+    <section
+      className={`${isDarkMode ? styles.dark : styles.light} ${styles.appContainer}`}
+    >
       <ThemeToggleButton />
       <section>{/* <Search /> */}</section>
-      <main>
-        <ProductList
-          products={products}
-          currentPage={currentPage}
-          onCardClick={handleCardClick}
-        />
+      <main className={styles.mainContainer}>
+        <section className={styles.cardsContainer}>
+          <ProductList
+            products={products}
+            currentPage={currentPage}
+            onCardClick={handleCardClick}
+          />
+        </section>
+
         {/* {selectedId && productDetails && (
           <DetailsPage product={productDetails} />
         )} */}
