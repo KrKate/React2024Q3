@@ -6,10 +6,15 @@ import tseslint from "typescript-eslint";
 import eslintReact from "eslint-plugin-react";
 import prettierPlugin from "eslint-plugin-prettier";
 import eslintConfigPrettier from "eslint-config-prettier";
+import reactCompiler from "eslint-plugin-react-compiler";
 
 export default tseslint.config({
-  extends: [js.configs.recommended, ...tseslint.configs.recommended],
-  files: ["src/**/*.{ts,tsx}"],
+  extends: [
+    js.configs.recommended,
+    ...tseslint.configs.recommended,
+    eslintConfigPrettier,
+  ],
+  files: ["**/*.{ts,tsx}"],
   ignores: ["dist", "node_modules"],
 
   languageOptions: {
@@ -25,28 +30,28 @@ export default tseslint.config({
     "react-refresh": reactRefresh,
     react: eslintReact,
     prettier: prettierPlugin,
+    "react-compiler": reactCompiler,
   },
   rules: {
     ...reactHooks.configs.recommended.rules,
     ...eslintConfigPrettier.rules,
-    'comma-dangle': ['error', 'only-multiline'],
-    'react/prop-types': 'off',
-    'react/display-name': 'off',
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/ban-ts-comment': 'error',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-var-requires': 'off',
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
+    "comma-dangle": ["error", "only-multiline"],
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/ban-ts-comment": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "no-console": "off",
-    'max-lines': ['warn', { max: 124 }],
+    "max-lines": ["warn", { max: 120 }],
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
     ],
   },
-  files: ["**/*.{ts,tsx}"],
 });
