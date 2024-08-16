@@ -1,50 +1,14 @@
-# React + TypeScript + Vite
+# Task for creating controlled and uncontrolled form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/tasks/forms.md
 
-Currently, two official plugins are available:
+Forms Both forms will collect the same data:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+- **name** (validate for first uppercase letter)
+- **age** (should be number, no negative values)
+- **email** (validate for email)
+- **password** / **match password** (should match, display the password strength: 1 number, 1 uppercase letter, 1 lowercased letter, 1 special character)
+- **gender** (you can use radio buttons or select control)
+- **accept Terms and Conditions agreement** (checkbox)
+- input control to upload **picture** (validate size and extension, allow png jpeg, save in redux store as base64)
+- autocomplete control to **select country** (all countries should be stored in the Redux store)
