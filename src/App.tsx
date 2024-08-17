@@ -5,10 +5,14 @@ import { APP_ROUTES } from "./constants/constants";
 function App() {
   return (
     <>
-      <div>
-        <Link to={APP_ROUTES.CONTROLLED}>Controlled form</Link>
-        <Link to={APP_ROUTES.UNCONTROLLED}>Uncontrolled form</Link>
-      </div>
+      <main>
+        <Link className="mainLink" to={APP_ROUTES.CONTROLLED}>
+          Controlled form
+        </Link>
+        <Link className="mainLink" to={APP_ROUTES.UNCONTROLLED}>
+          Uncontrolled form
+        </Link>
+      </main>
     </>
   );
 }

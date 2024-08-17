@@ -6,10 +6,31 @@
 }
 
 form {
-  resize: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
-form.input {
-  width: 100%;
-  display: block;
+main {
+  display: flex;
+  gap: 3rem;
+}
+
+.mainLink {
+  padding: 1rem;
+  border: 2px solid rgb(118, 87, 204);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.mainLink:hover {
+  background-color: rgb(20, 20, 20);
+}
+
+.error {
+  color: tomato;
+  height: 15px;
+  margin-top: 2px;
+  font-size: 13px;
 }

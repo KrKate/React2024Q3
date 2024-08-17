@@ -3,7 +3,7 @@ import { object, string, number } from "yup";
 export const formSchema = object({
   name: string()
     .trim()
-    .matches(/^[A-Z][a-zA-Z]*$/, {
+    .matches(/^[A-ZА-Я][a-zA-ZА-Яа-яЁё]*$/, {
       message: "First letter should be uppercase",
     })
     .required(),
