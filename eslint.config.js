@@ -48,7 +48,6 @@ export default tseslint.config({
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "no-console": "off",
-    "max-lines": ["warn", { max: 120 }],
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

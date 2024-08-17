@@ -49,7 +49,50 @@ button {
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  width: 100%;
+}
+
+progress {
+  border: 0;
+  width: 15rem;
+  height: 15px;
+  border-radius: 20px;
+}
+
+progress::-webkit-progress-bar {
+  border: 0;
+  height: 15px;
+  border-radius: 20px;
+}
+progress::-webkit-progress-value {
+  border: 0;
+  height: 15px;
+  border-radius: 20px;
+}
+progress::-moz-progress-bar {
+  border: 0;
+  height: 15px;
+  border-radius: 20px;
+}
+progress[value] {
+  appearance: none;
+}
+
+progress[value="1"] {
+  background-color: red;
+}
+
+progress[value="2"] {
+  background-color: orange;
+}
+
+progress[value="3"] {
+  background-color: green;
 }

@@ -1,16 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { formSchema } from "../../yupValidation/schema";
+import { formSchema } from "../../helpers/yupValidation/schema";
 import "../../App.css";
+import "../../index.css";
+import { useState } from "react";
+import checkStrength from "../../helpers/checkStrenght";
 
 interface IControlled {
   name: string;
   age: number;
   email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export const ControlledForm = () => {
+  const [, setPassword] = useState("");
+  const [strength, setStrength] = useState("Weak");
   const navigate = useNavigate();
   const {
     register,
@@ -21,8 +28,7 @@ export const ControlledForm = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<IControlled> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IControlled> = () => {
     navigate("/");
   };
 
@@ -41,6 +47,7 @@ export const ControlledForm = () => {
           />
           <p className="error">{errors.name?.message || ""}</p>
         </section>
+
         <section>
           <label htmlFor={"ageInput"}> Age </label>
           <input
@@ -48,18 +55,49 @@ export const ControlledForm = () => {
             placeholder="Enter your age"
             {...register("age")}
           />
+          <p className="error">{errors.age?.message || ""}</p>
         </section>
-        <p className="error">{errors.age?.message || ""}</p>
+
         <section>
           <label htmlFor={"ageInput"}> Email </label>
           <input
             type="email"
             placeholder="Enter your email"
+            autoComplete="off"
             {...register("email")}
           />
           <p className="error">{errors.email?.message || ""}</p>
         </section>
-        <section></section>
+
+        <section>
+          <label htmlFor={"passwordInput"}> Password </label>
+          <small className={strength}>({strength} password)</small>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            autoComplete="off"
+            {...register("password", {
+              onChange: (event) => {
+                const value = event.target.value;
+                setPassword(value);
+                setStrength(checkStrength(value));
+              },
+            })}
+          />
+          <p className="error">{errors.password?.message || ""}</p>
+        </section>
+
+        <section>
+          <label htmlFor={"confirmPasswordInput"}> Password </label>
+          <input
+            type="password"
+            placeholder="Repeat your password"
+            autoComplete="off"
+            {...register("confirmPassword")}
+          />
+          <p className="error">{errors.confirmPassword?.message || ""}</p>
+        </section>
+
         <button type="submit" disabled={!isValid || !isDirty}>
           Submit
         </button>

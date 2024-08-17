@@ -1,15 +1,14 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
 }
 
 form {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  width: 30rem;
 }
 
 main {
@@ -30,7 +29,43 @@ main {
 
 .error {
   color: tomato;
-  height: 15px;
+  height: 12px;
   margin-top: 2px;
   font-size: 13px;
 }
+
+progress {
+  border: 0;
+  width: 15rem;
+  height: 15px;
+  border-radius: 20px;
+}
+
+progress::-webkit-progress-bar {
+  border: 0;
+  height: 15px;
+  border-radius: 20px;
+}
+progress::-webkit-progress-value {
+  border: 0;
+  height: 15px;
+  border-radius: 20px;
+}
+progress::-moz-progress-bar {
+  border: 0;
+  height: 15px;
+  border-radius: 20px;
+}
+
+.Weak {
+  color: red;
+}
+
+.Medium {
+  color: orange;
+}
+
+.Strong {
+  color: green;
+}
+
