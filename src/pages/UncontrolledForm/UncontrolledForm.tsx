@@ -8,19 +8,21 @@ import checkStrength from "../../helpers/checkStrenght";
 export const UncontrolledForm = () => {
   const navigate = useNavigate();
   const [, setPassword] = useState("");
-  const [strength, setStrength] = useState("Weak");
+  const [strength, setStrength] = useState("No");
 
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
+  const genderRef = useRef<HTMLSelectElement>(null);
 
   const nameErrorRef = useRef<HTMLParagraphElement>(null);
   const ageErrorRef = useRef<HTMLParagraphElement>(null);
   const emailErrorRef = useRef<HTMLParagraphElement>(null);
   const passwordErrorRef = useRef<HTMLParagraphElement>(null);
   const confirmPassswordErrorRef = useRef<HTMLParagraphElement>(null);
+  const genderErrorRef = useRef<HTMLParagraphElement>(null);
 
   const errorRefs: { [key: string]: RefObject<HTMLDivElement> } = {
     name: nameErrorRef,
@@ -28,6 +30,7 @@ export const UncontrolledForm = () => {
     email: emailErrorRef,
     password: passwordErrorRef,
     confirmPassword: confirmPassswordErrorRef,
+    gender: genderErrorRef,
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -75,7 +78,7 @@ export const UncontrolledForm = () => {
         <section>
           <label htmlFor={"nameInput"}> Name </label>
           <input
-            id={"nameInput"}
+            id="nameInput"
             type="text"
             placeholder="Enter your name"
             ref={nameRef}
@@ -85,13 +88,23 @@ export const UncontrolledForm = () => {
 
         <section>
           <label htmlFor={"ageInput"}> Age </label>
-          <input type="number" placeholder="Enter your age" ref={ageRef} />
+          <input
+            id="ageInput"
+            type="number"
+            placeholder="Enter your age"
+            ref={ageRef}
+          />
           <p className="error" ref={ageErrorRef}></p>
         </section>
 
         <section>
-          <label htmlFor={"ageInput"}> Email </label>
-          <input type="email" placeholder="Enter your email" ref={emailRef} />
+          <label htmlFor={"emailInput"}> Email </label>
+          <input
+            id="emailInput"
+            type="email"
+            placeholder="Enter your email"
+            ref={emailRef}
+          />
           <p className="error" ref={emailErrorRef}></p>
         </section>
 
@@ -99,9 +112,9 @@ export const UncontrolledForm = () => {
           <label htmlFor={"passwordInput"}> Password </label>
           <small className={strength}>({strength} password)</small>
           <input
+            id="passwordInput"
             type="password"
             placeholder="Enter your password"
-            autoComplete="off"
             ref={passwordRef}
             onChange={handlePasswordChange}
           />
@@ -111,13 +124,25 @@ export const UncontrolledForm = () => {
         <section>
           <label htmlFor={"confirmPasswordInput"}> Password </label>
           <input
+            id="confirmPasswordInput"
             type="password"
             placeholder="Repeat your password"
-            autoComplete="off"
             ref={confirmPasswordRef}
           />
           <p className="error" ref={confirmPassswordErrorRef}></p>
         </section>
+
+        <section>
+          <label htmlFor={"genderSelect"}> Gender </label>
+          <select id="genderSelect" defaultValue="" ref={genderRef}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="pokemon">Pokemon</option>
+            <option value="other">Other</option>
+          </select>
+          <p className="error" ref={genderErrorRef}></p>
+        </section>
+
         <button type="submit">Submit</button>
       </form>
     </>

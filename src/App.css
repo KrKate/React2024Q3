@@ -13,7 +13,8 @@ form {
 
 main {
   display: flex;
-  gap: 3rem;
+  justify-content: space-around;
+  gap: 2rem;
 }
 
 .mainLink {
@@ -69,3 +70,17 @@ progress::-moz-progress-bar {
   color: green;
 }
 
+.userCard {
+  padding: 1rem;
+  border: 2px solid rgb(118, 87, 204);
+  border-radius: 10px;
+  margin: 1rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.highlight {
+  color: yellow;
+}

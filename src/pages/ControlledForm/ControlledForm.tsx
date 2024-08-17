@@ -6,6 +6,8 @@ import "../../App.css";
 import "../../index.css";
 import { useState } from "react";
 import checkStrength from "../../helpers/checkStrenght";
+import { useDispatch } from "react-redux";
+import { updateData } from "../../redux/dataSlice";
 
 interface IControlled {
   name: string;
@@ -13,9 +15,11 @@ interface IControlled {
   email: string;
   password: string;
   confirmPassword: string;
+  gender: string;
 }
 
 export const ControlledForm = () => {
+  const dispatch = useDispatch();
   const [, setPassword] = useState("");
   const [strength, setStrength] = useState("Weak");
   const navigate = useNavigate();
@@ -28,8 +32,9 @@ export const ControlledForm = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<IControlled> = () => {
+  const onSubmit: SubmitHandler<IControlled> = (dataControlled) => {
     navigate("/");
+    dispatch(updateData(dataControlled));
   };
 
   return (
@@ -51,6 +56,7 @@ export const ControlledForm = () => {
         <section>
           <label htmlFor={"ageInput"}> Age </label>
           <input
+            id={"ageInput"}
             type="number"
             placeholder="Enter your age"
             {...register("age")}
@@ -59,8 +65,9 @@ export const ControlledForm = () => {
         </section>
 
         <section>
-          <label htmlFor={"ageInput"}> Email </label>
+          <label htmlFor={"emailInput"}> Email </label>
           <input
+            id={"emailInput"}
             type="email"
             placeholder="Enter your email"
             autoComplete="off"
@@ -73,6 +80,7 @@ export const ControlledForm = () => {
           <label htmlFor={"passwordInput"}> Password </label>
           <small className={strength}>({strength} password)</small>
           <input
+            id={"passwordInput"}
             type="password"
             placeholder="Enter your password"
             autoComplete="off"
@@ -90,12 +98,24 @@ export const ControlledForm = () => {
         <section>
           <label htmlFor={"confirmPasswordInput"}> Password </label>
           <input
+            id={"confirmPasswordInput"}
             type="password"
             placeholder="Repeat your password"
             autoComplete="off"
             {...register("confirmPassword")}
           />
           <p className="error">{errors.confirmPassword?.message || ""}</p>
+        </section>
+
+        <section>
+          <label htmlFor={"genderSelect"}> Gender </label>
+          <select id="genderSelect" {...register("gender")}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="pokemon">Pokemon</option>
+            <option value="other">Other</option>
+          </select>
+          <p className="error">{errors.gender?.message || ""}</p>
         </section>
 
         <button type="submit" disabled={!isValid || !isDirty}>
