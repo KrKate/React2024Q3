@@ -3,10 +3,12 @@ import { UserInfo } from "../constants/constants";
 
 interface DataState {
   data: UserInfo[];
+  lastAddedIndex: number | null;
 }
 
 const initialState: DataState = {
   data: [],
+  lastAddedIndex: null,
 };
 
 const dataSlice = createSlice({
@@ -15,6 +17,7 @@ const dataSlice = createSlice({
   reducers: {
     updateData: (state, action: PayloadAction<UserInfo>) => {
       state.data.push(action.payload);
+      state.lastAddedIndex = state.data.length - 1;
     },
   },
 });
