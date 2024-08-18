@@ -8,7 +8,7 @@ import { useState } from "react";
 import checkStrength from "../../helpers/checkStrenght";
 import { useDispatch, useSelector } from "react-redux";
 import { updateData } from "../../redux/dataSlice";
-import { IControlled, IControlledValidate } from "../../constants/constants";
+import { IForm, IFormValidation } from "../../constants/constants";
 import createBase64 from "../../helpers/createBase64";
 import { RootState } from "../../redux/reducer";
 
@@ -23,14 +23,12 @@ export const ControlledForm = () => {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid },
-  } = useForm<IControlledValidate>({
+  } = useForm<IFormValidation>({
     mode: "onChange",
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<IControlledValidate> = async (
-    dataControlled,
-  ) => {
+  const onSubmit: SubmitHandler<IFormValidation> = async (dataControlled) => {
     let base64Image: string = "";
 
     if (dataControlled.image) {
@@ -46,7 +44,7 @@ export const ControlledForm = () => {
       }
     }
 
-    const updatedData: IControlled = {
+    const updatedData: IForm = {
       ...dataControlled,
       image: base64Image || "",
     };

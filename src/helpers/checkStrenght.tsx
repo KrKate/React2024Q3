@@ -13,12 +13,13 @@ function checkStrength(password: string) {
     case 1:
       return "Weak";
     case 2:
-      return "Medium";
     case 3:
+      return "Medium";
     case 4:
+    case 5:
       return "Strong";
     default:
-      return "Weak";
+      return "Strong";
   }
 }
 

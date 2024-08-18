@@ -6,7 +6,7 @@ import { formSchema } from "../../helpers/yupValidation/schema";
 import checkStrength from "../../helpers/checkStrenght";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../redux/dataSlice";
-import { IControlled, IControlledValidate } from "../../constants/constants";
+import { IForm, IFormValidation } from "../../constants/constants";
 import createBase64 from "../../helpers/createBase64";
 import { countries } from "../../constants/countries";
 
@@ -58,7 +58,7 @@ export const UncontrolledForm = () => {
       selectedImage = imageRef.current.files[0];
     }
 
-    const formData: IControlledValidate = {
+    const formData: IFormValidation = {
       name: nameRef.current?.value ?? "",
       age: Number(ageRef.current?.value),
       email: emailRef.current?.value ?? "",
@@ -72,7 +72,7 @@ export const UncontrolledForm = () => {
 
     try {
       await formSchema.validate(formData, { abortEarly: false });
-      const reduxData: IControlled = {
+      const reduxData: IForm = {
         ...formData,
         image: selectedImage ? await createBase64(selectedImage) : "",
       };

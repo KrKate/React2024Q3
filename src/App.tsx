@@ -33,7 +33,7 @@ function App() {
                 <p>Email: {user.email}</p>
                 <p>Password: {user.password}</p>
                 <p>Gender: {user.gender}</p>
-                <p>Country: </p>
+                <p>Country: {user.country}</p>
               </section>
               <section className="img">
                 {user.image && typeof user.image === "string" && (

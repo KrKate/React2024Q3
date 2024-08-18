@@ -16,7 +16,7 @@ export type UserInfo = {
   country: string;
 };
 
-export interface IControlled {
+export interface IForm {
   name: string;
   age: number;
   email: string;
@@ -28,7 +28,7 @@ export interface IControlled {
   country: string;
 }
 
-export interface IControlledValidate {
+export interface IFormValidation {
   name: string;
   age: number;
   email: string;
