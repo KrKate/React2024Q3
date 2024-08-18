@@ -24,37 +24,41 @@ export const formSchema = object({
     .required()
     .oneOf([ref("password")], "Password does not match"),
   gender: string().required(),
-  accept: boolean().default(false).required().test({
-    name: 'checked',
-    message: 'Please, accept Terms and Conditions',
-    test(value) {
-      return value;
-    },
-  })
-  .transform((value) => Boolean(value)),
+  accept: boolean()
+    .default(false)
+    .required()
+    .test({
+      name: "checked",
+      message: "Please, accept Terms and Conditions",
+      test(value) {
+        return value;
+      },
+    })
+    .transform((value) => Boolean(value)),
   image: mixed((value): value is File => value instanceof File)
-  .required()
-  .test({
-    name: 'size',
-    message: 'The file must be less then 2mb',
-    test(value) {
-      const file = value as File;
-      if (file.size <= 2000000) return true;
-      return false;
-    },
-  })
-  .test({
-    name: 'extension',
-    message: 'Only the following formats are accepted: png, jpeg',
-    test(value) {
-      const file = value as File;
-      if (file.type === 'image/jpeg' || file.type === 'image/png')
-        return true;
-      return false;
-    },
-  })
-  .transform((value) => {
-    if (value.length) return value[0];
-    return value;
-  }),
+    .required()
+    .test({
+      name: "size",
+      message: "The file must be less then 2mb",
+      test(value) {
+        const file = value as File;
+        if (file.size <= 2000000) return true;
+        return false;
+      },
+    })
+    .test({
+      name: "extension",
+      message: "Only the following formats are accepted: png, jpeg",
+      test(value) {
+        const file = value as File;
+        if (file.type === "image/jpeg" || file.type === "image/png")
+          return true;
+        return false;
+      },
+    })
+    .transform((value) => {
+      if (value.length) return value[0];
+      return value;
+    }),
+  country: string().required(),
 });

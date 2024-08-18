@@ -13,6 +13,7 @@ export type UserInfo = {
   gender: string;
   accept: boolean;
   image: string;
+  country: string;
 };
 
 export interface IControlled {
@@ -24,6 +25,7 @@ export interface IControlled {
   gender: string;
   accept: boolean;
   image: string;
+  country: string;
 }
 
 export interface IControlledValidate {
@@ -35,4 +37,5 @@ export interface IControlledValidate {
   gender: string;
   accept: boolean;
   image: File;
+  country: string;
 }

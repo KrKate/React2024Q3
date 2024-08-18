@@ -6,16 +6,19 @@ import "../../App.css";
 import "../../index.css";
 import { useState } from "react";
 import checkStrength from "../../helpers/checkStrenght";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateData } from "../../redux/dataSlice";
 import { IControlled, IControlledValidate } from "../../constants/constants";
 import createBase64 from "../../helpers/createBase64";
+import { RootState } from "../../redux/reducer";
 
 export const ControlledForm = () => {
   const dispatch = useDispatch();
   const [, setPassword] = useState("");
   const [strength, setStrength] = useState("No");
+  const countries = useSelector((state: RootState) => state.countries);
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -137,6 +140,17 @@ export const ControlledForm = () => {
           <label htmlFor={"image"}> Image </label>
           <input id={"image"} type="file" {...register("image")} />
           <p className="error">{errors.image?.message || ""}</p>
+        </section>
+
+        <section>
+          <label htmlFor={"country"}> Country </label>
+          <input list="country-list" {...register("country")} />
+          <datalist id="country-list">
+            {countries.map((country) => (
+              <option key={country} value={country} />
+            ))}
+          </datalist>
+          <p className="error">{errors.country?.message || ""}</p>
         </section>
 
         <section>

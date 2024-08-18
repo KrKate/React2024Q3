@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { updateData } from "../../redux/dataSlice";
 import { IControlled, IControlledValidate } from "../../constants/constants";
 import createBase64 from "../../helpers/createBase64";
+import { countries } from "../../constants/countries";
 
 export const UncontrolledForm = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const UncontrolledForm = () => {
   const genderRef = useRef<HTMLSelectElement>(null);
   const acceptRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
+  const countryRef = useRef<HTMLInputElement>(null);
 
   const nameErrorRef = useRef<HTMLParagraphElement>(null);
   const ageErrorRef = useRef<HTMLParagraphElement>(null);
@@ -32,6 +34,7 @@ export const UncontrolledForm = () => {
   const genderErrorRef = useRef<HTMLParagraphElement>(null);
   const acceptErrorRef = useRef<HTMLParagraphElement>(null);
   const imageErrorRef = useRef<HTMLParagraphElement>(null);
+  const countryErrorRef = useRef<HTMLParagraphElement>(null);
 
   const errorRefs: { [key: string]: RefObject<HTMLDivElement> } = {
     name: nameErrorRef,
@@ -42,6 +45,7 @@ export const UncontrolledForm = () => {
     gender: genderErrorRef,
     accept: acceptErrorRef,
     image: imageErrorRef,
+    country: countryErrorRef,
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -63,6 +67,7 @@ export const UncontrolledForm = () => {
       gender: genderRef.current?.value ?? "",
       accept: acceptRef.current?.checked ?? false,
       image: selectedImage || new File([], ""),
+      country: countryRef.current?.value || "",
     };
 
     try {
@@ -173,6 +178,17 @@ export const UncontrolledForm = () => {
           <label htmlFor={"image"}> Image </label>
           <input id={"image"} type="file" ref={imageRef} />
           <p className="error" ref={imageErrorRef}></p>
+        </section>
+
+        <section>
+          <label htmlFor={"country"}> Country </label>
+          <input list="country-list" ref={countryRef} />
+          <datalist id="country-list">
+            {countries.map((country) => (
+              <option key={country} value={country} />
+            ))}
+          </datalist>
+          <p className="error" ref={countryErrorRef}></p>
         </section>
 
         <section>
