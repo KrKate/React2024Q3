@@ -8,17 +8,8 @@ import { useState } from "react";
 import checkStrength from "../../helpers/checkStrenght";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../redux/dataSlice";
-
-interface IControlled {
-  name: string;
-  age: number;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  gender: string;
-  accept: boolean
-  image: File
-}
+import { IControlled, IControlledValidate } from "../../constants/constants";
+import createBase64 from "../../helpers/createBase64";
 
 export const ControlledForm = () => {
   const dispatch = useDispatch();
@@ -29,14 +20,36 @@ export const ControlledForm = () => {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid },
-  } = useForm<IControlled>({
+  } = useForm<IControlledValidate>({
     mode: "onChange",
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmit: SubmitHandler<IControlled> = (dataControlled) => {
+  const onSubmit: SubmitHandler<IControlledValidate> = async (
+    dataControlled,
+  ) => {
+    let base64Image: string = "";
+
+    if (dataControlled.image) {
+      if (dataControlled.image instanceof File) {
+        try {
+          base64Image = await createBase64(dataControlled.image);
+        } catch (error) {
+          console.error("Error converting file to base64:", error);
+          return;
+        }
+      } else {
+        base64Image = dataControlled.image;
+      }
+    }
+
+    const updatedData: IControlled = {
+      ...dataControlled,
+      image: base64Image || "",
+    };
+
+    dispatch(updateData(updatedData));
     navigate("/");
-    dispatch(updateData(dataControlled));
   };
 
   return (
@@ -122,22 +135,14 @@ export const ControlledForm = () => {
 
         <section>
           <label htmlFor={"image"}> Image </label>
-          <input
-            id={"image"}
-            type="file"
-            {...register("image")}
-          />
+          <input id={"image"} type="file" {...register("image")} />
           <p className="error">{errors.image?.message || ""}</p>
         </section>
 
         <section>
           <div className="acceptWrapper">
-        <label htmlFor={"acceptInput"}> Accept Terms and Conditions </label>
-        <input
-            id="acceptInput"
-            type="checkbox"
-            {...register("accept")}
-          />
+            <label htmlFor={"acceptInput"}> Accept Terms and Conditions </label>
+            <input id="acceptInput" type="checkbox" {...register("accept")} />
           </div>
           <p className="error">{errors.accept?.message || ""}</p>
         </section>

@@ -6,6 +6,8 @@ import { formSchema } from "../../helpers/yupValidation/schema";
 import checkStrength from "../../helpers/checkStrenght";
 import { useDispatch } from "react-redux";
 import { updateData } from "../../redux/dataSlice";
+import { IControlled, IControlledValidate } from "../../constants/constants";
+import createBase64 from "../../helpers/createBase64";
 
 export const UncontrolledForm = () => {
   const dispatch = useDispatch();
@@ -39,27 +41,38 @@ export const UncontrolledForm = () => {
     confirmPassword: confirmPassswordErrorRef,
     gender: genderErrorRef,
     accept: acceptErrorRef,
-    image: imageErrorRef
+    image: imageErrorRef,
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const formData = {
-      name: nameRef.current?.value,
+    let selectedImage: File | null = null;
+
+    if (imageRef.current?.files?.[0]) {
+      selectedImage = imageRef.current.files[0];
+    }
+
+    const formData: IControlledValidate = {
+      name: nameRef.current?.value ?? "",
       age: Number(ageRef.current?.value),
-      email: emailRef.current?.value,
-      password: passwordRef.current?.value,
-      confirmPassword: confirmPasswordRef.current?.value,
-      gender: genderRef.current?.value,
-      accept: acceptRef.current?.checked,
-      image: imageRef.current?.files?.[0],
+      email: emailRef.current?.value ?? "",
+      password: passwordRef.current?.value ?? "",
+      confirmPassword: confirmPasswordRef.current?.value ?? "",
+      gender: genderRef.current?.value ?? "",
+      accept: acceptRef.current?.checked ?? false,
+      image: selectedImage || new File([], ""),
     };
 
     try {
       await formSchema.validate(formData, { abortEarly: false });
-      dispatch(updateData(formData));
+      const reduxData: IControlled = {
+        ...formData,
+        image: selectedImage ? await createBase64(selectedImage) : "",
+      };
+
+      dispatch(updateData(reduxData));
       navigate("/");
     } catch (err) {
       if (err instanceof ValidationError) {
@@ -158,22 +171,14 @@ export const UncontrolledForm = () => {
 
         <section>
           <label htmlFor={"image"}> Image </label>
-          <input
-            id={"image"}
-            type="file"
-            ref={imageRef}
-          />
+          <input id={"image"} type="file" ref={imageRef} />
           <p className="error" ref={imageErrorRef}></p>
         </section>
 
         <section>
           <div className="acceptWrapper">
-        <label htmlFor={"acceptInput"}> Accept Terms and Conditions </label>
-        <input
-            id="acceptInput"
-            type="checkbox"
-            ref={acceptRef}
-          />
+            <label htmlFor={"acceptInput"}> Accept Terms and Conditions </label>
+            <input id="acceptInput" type="checkbox" ref={acceptRef} />
           </div>
           <p className="error" ref={acceptErrorRef}></p>
         </section>

@@ -20,6 +20,7 @@ main {
 
 .mainLink {
   padding: 1rem;
+  margin: 2rem;
   border: 2px solid rgb(118, 87, 204);
   border-radius: 10px;
   transition: all 0.3s ease;
@@ -36,29 +37,6 @@ main {
   font-size: 13px;
 }
 
-progress {
-  border: 0;
-  width: 15rem;
-  height: 15px;
-  border-radius: 20px;
-}
-
-progress::-webkit-progress-bar {
-  border: 0;
-  height: 15px;
-  border-radius: 20px;
-}
-progress::-webkit-progress-value {
-  border: 0;
-  height: 15px;
-  border-radius: 20px;
-}
-progress::-moz-progress-bar {
-  border: 0;
-  height: 15px;
-  border-radius: 20px;
-}
-
 .Weak {
   color: red;
 }
@@ -73,9 +51,14 @@ progress::-moz-progress-bar {
 
 .userCard {
   padding: 1rem;
+  max-width: 40rem;
   border: 2px solid rgb(118, 87, 204);
   border-radius: 10px;
   margin: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  gap: 3rem;
 }
 
 ul {
@@ -92,4 +75,14 @@ ul {
 
 #acceptInput {
   width: 20%;
+}
+
+
+img {
+  width: 100%;
+  border: 1px dashed rgb(118, 87, 204);
+}
+
+.img {
+  width: 45%;
 }

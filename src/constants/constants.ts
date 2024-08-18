@@ -12,7 +12,7 @@ export type UserInfo = {
   confirmPassword: string;
   gender: string;
   accept: boolean;
-  image: File | null;
+  image: string;
 };
 
 export interface IControlled {
@@ -22,6 +22,17 @@ export interface IControlled {
   password: string;
   confirmPassword: string;
   gender: string;
-  accept: boolean
-  image: File
+  accept: boolean;
+  image: string;
+}
+
+export interface IControlledValidate {
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  accept: boolean;
+  image: File;
 }

@@ -19,18 +19,22 @@ function App() {
       </main>
       <aside>
         <ul>
-        {users.map((user) => (
-          <li className="userCard">
-             <section className="info">
-             <p>Name: {user.name}</p>
-             <p>Age: {user.age}</p>
-             <p>Email: {user.email}</p>
-             <p>Password: {user.password}</p>
-             <p>Gender: {user.gender}</p>
-            </section>
-            <section className="img"></section>
-          </li>
-        ))}
+          {users.map((user) => (
+            <li className="userCard" key={user.email}>
+              <section className="info">
+                <p>Name: {user.name}</p>
+                <p>Age: {user.age}</p>
+                <p>Email: {user.email}</p>
+                <p>Password: {user.password}</p>
+                <p>Gender: {user.gender}</p>
+              </section>
+              <section className="img">
+                {user.image && typeof user.image === "string" && (
+                  <img src={user.image} />
+                )}
+              </section>
+            </li>
+          ))}
         </ul>
       </aside>
     </div>
