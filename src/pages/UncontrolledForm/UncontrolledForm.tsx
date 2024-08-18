@@ -4,8 +4,11 @@ import "../../App.css";
 import { ValidationError } from "yup";
 import { formSchema } from "../../helpers/yupValidation/schema";
 import checkStrength from "../../helpers/checkStrenght";
+import { useDispatch } from "react-redux";
+import { updateData } from "../../redux/dataSlice";
 
 export const UncontrolledForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [, setPassword] = useState("");
   const [strength, setStrength] = useState("No");
@@ -45,7 +48,7 @@ export const UncontrolledForm = () => {
 
     const formData = {
       name: nameRef.current?.value,
-      age: ageRef.current?.value,
+      age: Number(ageRef.current?.value),
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
       confirmPassword: confirmPasswordRef.current?.value,
@@ -56,6 +59,7 @@ export const UncontrolledForm = () => {
 
     try {
       await formSchema.validate(formData, { abortEarly: false });
+      dispatch(updateData(formData));
       navigate("/");
     } catch (err) {
       if (err instanceof ValidationError) {

@@ -18,15 +18,20 @@ function App() {
         </Link>
       </main>
       <aside>
+        <ul>
         {users.map((user) => (
-          <ul className="userCard">
-            <li>Name: {user.name}</li>
-            <li>Age: {user.age}</li>
-            <li>Email: {user.email}</li>
-            <li>Password: {user.password}</li>
-            <li>Gender: {user.gender}</li>
-          </ul>
+          <li className="userCard">
+             <section className="info">
+             <p>Name: {user.name}</p>
+             <p>Age: {user.age}</p>
+             <p>Email: {user.email}</p>
+             <p>Password: {user.password}</p>
+             <p>Gender: {user.gender}</p>
+            </section>
+            <section className="img"></section>
+          </li>
         ))}
+        </ul>
       </aside>
     </div>
   );
