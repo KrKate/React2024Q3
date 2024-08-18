@@ -1,0 +1,88 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+form {
+  
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.mainLink {
+  padding: 1rem;
+  margin: 2rem;
+  border: 2px solid rgb(118, 87, 204);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.mainLink:hover {
+  background-color: rgb(20, 20, 20);
+}
+
+.error {
+  color: tomato;
+  height: 12px;
+  margin-top: 2px;
+  font-size: 13px;
+}
+
+.Weak {
+  color: red;
+}
+
+.Medium {
+  color: orange;
+}
+
+.Strong {
+  color: green;
+}
+
+.userCard {
+  padding: 1rem;
+  max-width: 40rem;
+  border: 2px solid rgb(118, 87, 204);
+  border-radius: 10px;
+  margin: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  gap: 3rem;
+}
+
+ul {
+  list-style: none;
+}
+
+.highlight {
+  border: 3px solid yellow;
+}
+
+.acceptWrapper {
+  display: flex;
+}
+
+#acceptInput {
+  width: 20%;
+}
+
+
+img {
+  width: 100%;
+  border: 1px dashed rgb(118, 87, 204);
+}
+
+.img {
+  width: 45%;
+}
