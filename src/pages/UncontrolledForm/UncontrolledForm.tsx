@@ -17,6 +17,7 @@ export const UncontrolledForm = () => {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
   const acceptRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const nameErrorRef = useRef<HTMLParagraphElement>(null);
   const ageErrorRef = useRef<HTMLParagraphElement>(null);
@@ -25,6 +26,7 @@ export const UncontrolledForm = () => {
   const confirmPassswordErrorRef = useRef<HTMLParagraphElement>(null);
   const genderErrorRef = useRef<HTMLParagraphElement>(null);
   const acceptErrorRef = useRef<HTMLParagraphElement>(null);
+  const imageErrorRef = useRef<HTMLParagraphElement>(null);
 
   const errorRefs: { [key: string]: RefObject<HTMLDivElement> } = {
     name: nameErrorRef,
@@ -33,7 +35,8 @@ export const UncontrolledForm = () => {
     password: passwordErrorRef,
     confirmPassword: confirmPassswordErrorRef,
     gender: genderErrorRef,
-    accept: acceptErrorRef
+    accept: acceptErrorRef,
+    image: imageErrorRef
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -47,7 +50,8 @@ export const UncontrolledForm = () => {
       password: passwordRef.current?.value,
       confirmPassword: confirmPasswordRef.current?.value,
       gender: genderRef.current?.value,
-      accept: acceptRef.current?.checked
+      accept: acceptRef.current?.checked,
+      image: imageRef.current?.files?.[0],
     };
 
     try {
@@ -146,6 +150,16 @@ export const UncontrolledForm = () => {
             <option value="other">Other</option>
           </select>
           <p className="error" ref={genderErrorRef}></p>
+        </section>
+
+        <section>
+          <label htmlFor={"image"}> Image </label>
+          <input
+            id={"image"}
+            type="file"
+            ref={imageRef}
+          />
+          <p className="error" ref={imageErrorRef}></p>
         </section>
 
         <section>

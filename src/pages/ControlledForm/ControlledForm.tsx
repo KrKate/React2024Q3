@@ -17,6 +17,7 @@ interface IControlled {
   confirmPassword: string;
   gender: string;
   accept: boolean
+  image: File
 }
 
 export const ControlledForm = () => {
@@ -117,6 +118,16 @@ export const ControlledForm = () => {
             <option value="other">Other</option>
           </select>
           <p className="error">{errors.gender?.message || ""}</p>
+        </section>
+
+        <section>
+          <label htmlFor={"image"}> Image </label>
+          <input
+            id={"image"}
+            type="file"
+            {...register("image")}
+          />
+          <p className="error">{errors.image?.message || ""}</p>
         </section>
 
         <section>
