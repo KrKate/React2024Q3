@@ -16,12 +16,13 @@ interface IControlled {
   password: string;
   confirmPassword: string;
   gender: string;
+  accept: boolean
 }
 
 export const ControlledForm = () => {
   const dispatch = useDispatch();
   const [, setPassword] = useState("");
-  const [strength, setStrength] = useState("Weak");
+  const [strength, setStrength] = useState("No");
   const navigate = useNavigate();
   const {
     register,
@@ -116,6 +117,18 @@ export const ControlledForm = () => {
             <option value="other">Other</option>
           </select>
           <p className="error">{errors.gender?.message || ""}</p>
+        </section>
+
+        <section>
+          <div className="acceptWrapper">
+        <label htmlFor={"acceptInput"}> Accept Terms and Conditions </label>
+        <input
+            id="acceptInput"
+            type="checkbox"
+            {...register("accept")}
+          />
+          </div>
+          <p className="error">{errors.accept?.message || ""}</p>
         </section>
 
         <button type="submit" disabled={!isValid || !isDirty}>

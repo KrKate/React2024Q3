@@ -2,10 +2,11 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 0;
+  box-sizing: border-box;
 }
 
 form {
-  box-sizing: border-box;
+  
   display: flex;
   flex-direction: column;
   width: 30rem;
@@ -83,4 +84,12 @@ ul {
 
 .highlight {
   color: yellow;
+}
+
+.acceptWrapper {
+  display: flex;
+}
+
+#acceptInput {
+  width: 20%;
 }

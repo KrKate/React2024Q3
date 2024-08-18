@@ -16,6 +16,7 @@ export const UncontrolledForm = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
+  const acceptRef = useRef<HTMLInputElement>(null);
 
   const nameErrorRef = useRef<HTMLParagraphElement>(null);
   const ageErrorRef = useRef<HTMLParagraphElement>(null);
@@ -23,6 +24,7 @@ export const UncontrolledForm = () => {
   const passwordErrorRef = useRef<HTMLParagraphElement>(null);
   const confirmPassswordErrorRef = useRef<HTMLParagraphElement>(null);
   const genderErrorRef = useRef<HTMLParagraphElement>(null);
+  const acceptErrorRef = useRef<HTMLParagraphElement>(null);
 
   const errorRefs: { [key: string]: RefObject<HTMLDivElement> } = {
     name: nameErrorRef,
@@ -31,6 +33,7 @@ export const UncontrolledForm = () => {
     password: passwordErrorRef,
     confirmPassword: confirmPassswordErrorRef,
     gender: genderErrorRef,
+    accept: acceptErrorRef
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -43,6 +46,8 @@ export const UncontrolledForm = () => {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
       confirmPassword: confirmPasswordRef.current?.value,
+      gender: genderRef.current?.value,
+      accept: acceptRef.current?.checked
     };
 
     try {
@@ -141,6 +146,18 @@ export const UncontrolledForm = () => {
             <option value="other">Other</option>
           </select>
           <p className="error" ref={genderErrorRef}></p>
+        </section>
+
+        <section>
+          <div className="acceptWrapper">
+        <label htmlFor={"acceptInput"}> Accept Terms and Conditions </label>
+        <input
+            id="acceptInput"
+            type="checkbox"
+            ref={acceptRef}
+          />
+          </div>
+          <p className="error" ref={acceptErrorRef}></p>
         </section>
 
         <button type="submit">Submit</button>

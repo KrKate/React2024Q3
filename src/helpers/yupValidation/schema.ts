@@ -1,4 +1,4 @@
-import { object, string, number, ref } from "yup";
+import { object, string, number, ref, boolean } from "yup";
 
 export const formSchema = object({
   name: string()
@@ -23,4 +23,13 @@ export const formSchema = object({
   confirmPassword: string()
     .required()
     .oneOf([ref("password")], "Password does not match"),
+  gender: string().required(),
+  accept: boolean().default(false).required().test({
+    name: 'checked',
+    message: 'Please, accept T&C',
+    test(value) {
+      return value;
+    },
+  })
+  .transform((value) => Boolean(value)),
 });
